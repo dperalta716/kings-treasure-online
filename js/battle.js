@@ -452,7 +452,8 @@ export class Battle {
         await this.terminal.waitForEnter();
 
         // XP and gold rewards
-        this.terminal.print(`You gained ${this.terminal.xpText(this.enemy.xpReward)}!`);
+        this.character.gold += this.enemy.goldReward;
+        this.terminal.print(`You gained ${this.terminal.xpText(this.enemy.xpReward)}! You found ${this.terminal.goldText(this.enemy.goldReward)}!`);
         const levelUps = this.character.gainXp(this.enemy.xpReward);
 
         // Handle level ups
@@ -477,9 +478,6 @@ export class Battle {
         if (levelUps.length > 0 && this.saveMenu && this.location) {
             await this.saveMenu.offerSave(this.character, this.location);
         }
-
-        this.character.gold += this.enemy.goldReward;
-        this.terminal.print(`You found ${this.terminal.goldText(this.enemy.goldReward)}!`);
 
         // Handle special item drops
         const specialDrop = SPECIAL_ITEM_DROPS[this.enemyType];

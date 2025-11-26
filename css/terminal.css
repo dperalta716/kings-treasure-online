@@ -4,6 +4,60 @@
     box-sizing: border-box;
 }
 
+/* Loading Screen */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0a0a0a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+
+#loading-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#loading-content {
+    text-align: center;
+    color: #00ff00;
+    font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
+}
+
+#loading-content h1 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    text-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+}
+
+#loading-bar-container {
+    width: 300px;
+    height: 20px;
+    background: #1a1a1a;
+    border: 2px solid #00ff00;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 auto 15px;
+}
+
+#loading-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(to right, #00ff00, #44ff44);
+    transition: width 0.1s ease;
+}
+
+#loading-text {
+    font-size: 1.2em;
+    opacity: 0.8;
+}
+
 body {
     background: #0a0a0a;
     margin: 0;

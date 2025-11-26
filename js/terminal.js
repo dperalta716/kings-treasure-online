@@ -167,10 +167,22 @@ export class Terminal {
             if (this.sprite.style.display === 'block' && this.sprite.src !== src) {
                 this.sprite.classList.add('fading');
                 setTimeout(() => {
-                    this.sprite.src = src;
-                    this.sprite.alt = label;
-                    this.spriteLabel.textContent = label;
-                    this.sprite.classList.remove('fading');
+                    // Preload the new image before showing
+                    const newImage = new Image();
+                    newImage.onload = () => {
+                        this.sprite.src = src;
+                        this.sprite.alt = label;
+                        this.spriteLabel.textContent = label;
+                        this.sprite.classList.remove('fading');
+                    };
+                    newImage.onerror = () => {
+                        // Still update even if image fails to load
+                        this.sprite.src = src;
+                        this.sprite.alt = label;
+                        this.spriteLabel.textContent = label;
+                        this.sprite.classList.remove('fading');
+                    };
+                    newImage.src = src;
                 }, 250); // Match CSS transition duration
             } else {
                 // First time showing - just display it

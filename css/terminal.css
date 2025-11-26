@@ -1,0 +1,297 @@
+/* Terminal styling for The King's Treasure */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #0a0a0a;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
+}
+
+#game-container {
+    display: flex;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: calc(100vh - 40px);
+}
+
+#terminal {
+    flex: 1;
+    background: #0d0d0d;
+    border: 2px solid #00ff00;
+    border-radius: 8px;
+    padding: 20px;
+    font-size: 16px;
+    color: #00ff00;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#output {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+    line-height: 1.5;
+}
+
+#output::-webkit-scrollbar {
+    width: 8px;
+}
+
+#output::-webkit-scrollbar-track {
+    background: #0d0d0d;
+}
+
+#output::-webkit-scrollbar-thumb {
+    background: #00ff00;
+    border-radius: 4px;
+}
+
+#input-line {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #00ff0044;
+}
+
+#input-line span {
+    color: #00ff00;
+    margin-right: 5px;
+}
+
+#command-input {
+    background: transparent;
+    border: none;
+    color: #00ff00;
+    font-family: inherit;
+    font-size: inherit;
+    flex: 1;
+    outline: none;
+    caret-color: #00ff00;
+}
+
+#command-input::placeholder {
+    color: #00ff0066;
+}
+
+#sprite-panel {
+    width: 280px;
+    background: #0d0d0d;
+    border: 2px solid #00ff00;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+}
+
+#current-sprite {
+    max-width: 240px;
+    max-height: 240px;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    border: 2px solid #00ff00;
+    margin-bottom: 15px;
+}
+
+#sprite-label {
+    color: #00ff00;
+    text-align: center;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Text output line styling */
+.output-line {
+    margin-bottom: 2px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.output-line.user-input {
+    color: #888888;
+    font-style: italic;
+}
+
+/* Color classes matching Python colors */
+.red { color: #ff4444; }
+.green { color: #44ff44; }
+.yellow { color: #ffff44; }
+.cyan { color: #44ffff; }
+.magenta { color: #ff44ff; }
+.blue { color: #4444ff; }
+.white { color: #ffffff; }
+.bright-red { color: #ff6666; }
+.bright-green { color: #66ff66; }
+.bright-yellow { color: #ffff66; }
+.bright-cyan { color: #66ffff; }
+.bright-magenta { color: #ff66ff; }
+.bright-blue { color: #6666ff; }
+.bold { font-weight: bold; }
+.dim { opacity: 0.6; }
+
+/* Special text effects */
+.critical {
+    color: #ffff44;
+    font-weight: bold;
+    text-shadow: 0 0 10px #ffff00;
+}
+
+.victory {
+    color: #44ff44;
+    font-weight: bold;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+.defeat {
+    color: #ff4444;
+    font-weight: bold;
+    text-shadow: 0 0 10px #ff0000;
+}
+
+.boss {
+    color: #ff4444;
+    font-weight: bold;
+    animation: pulse 1s infinite;
+}
+
+.gold {
+    color: #ffd700;
+}
+
+.xp {
+    color: #44ffff;
+}
+
+.level-up {
+    color: #ff44ff;
+    font-weight: bold;
+    text-shadow: 0 0 10px #ff00ff;
+}
+
+/* Combat separator */
+.separator {
+    color: #00ff0066;
+    margin: 10px 0;
+}
+
+/* Menu styling */
+.menu-option {
+    margin: 5px 0;
+}
+
+.menu-number {
+    color: #ffff44;
+    font-weight: bold;
+}
+
+/* Box drawing */
+.box {
+    border: 1px solid #00ff00;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.box-title {
+    color: #44ffff;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Health bar colors */
+.health-high { color: #44ff44; }
+.health-medium { color: #ffff44; }
+.health-low { color: #ff4444; }
+
+/* Animations */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.blink {
+    animation: blink 1s infinite;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    #game-container {
+        flex-direction: column;
+        height: auto;
+        min-height: calc(100vh - 20px);
+    }
+
+    #sprite-panel {
+        width: 100%;
+        order: -1;
+        padding: 15px;
+    }
+
+    #current-sprite {
+        max-width: 150px;
+        max-height: 150px;
+    }
+
+    #terminal {
+        min-height: 60vh;
+    }
+
+    #terminal,
+    #sprite-panel {
+        font-size: 14px;
+    }
+}
+
+/* Title screen styling */
+.title {
+    font-size: 1.2em;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.title-box {
+    border: 2px double #00ff00;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+/* Stats display */
+.stats-display {
+    margin: 10px 0;
+    padding: 10px;
+    border-left: 2px solid #00ff00;
+}
+
+.stat-line {
+    margin: 5px 0;
+}
+
+.stat-label {
+    color: #888888;
+}
+
+.stat-value {
+    color: #00ff00;
+    font-weight: bold;
+}

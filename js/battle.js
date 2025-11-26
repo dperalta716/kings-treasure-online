@@ -449,7 +449,6 @@ export class Battle {
         this.terminal.showSprite(getDefeatedEnemySprite(this.enemyType), `${this.enemy.name} Defeated`);
         this.terminal.victoryBanner();
         this.terminal.print(`You defeated the [red][bold]${this.enemy.name}[/bold][/red]!`);
-        await this.terminal.waitForEnter();
 
         // XP and gold rewards
         this.character.gold += this.enemy.goldReward;

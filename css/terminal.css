@@ -14,19 +14,59 @@ body {
 
 #game-container {
     display: flex;
-    gap: 20px;
-    max-width: 1200px;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 1000px;
     margin: 0 auto;
     height: calc(100vh - 40px);
 }
 
-#terminal {
+/* Sprite panel - takes up most of the screen (top) */
+#sprite-panel {
     flex: 1;
     background: #0d0d0d;
     border: 2px solid #00ff00;
     border-radius: 8px;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+    min-height: 0;
+}
+
+#current-sprite {
+    max-width: 100%;
+    max-height: calc(100% - 40px);
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    border: 3px solid #00ff00;
+}
+
+#sprite-label {
+    color: #00ff00;
+    text-align: center;
     font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* Terminal - fixed height at bottom (8-10 lines) */
+#terminal {
+    height: 220px;
+    min-height: 220px;
+    max-height: 220px;
+    background: #0d0d0d;
+    border: 2px solid #00ff00;
+    border-radius: 8px;
+    padding: 15px;
+    font-size: 14px;
     color: #00ff00;
     box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
     display: flex;
@@ -38,11 +78,11 @@ body {
     flex: 1;
     overflow-y: auto;
     padding-right: 10px;
-    line-height: 1.5;
+    line-height: 1.4;
 }
 
 #output::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
 }
 
 #output::-webkit-scrollbar-track {
@@ -51,14 +91,14 @@ body {
 
 #output::-webkit-scrollbar-thumb {
     background: #00ff00;
-    border-radius: 4px;
+    border-radius: 3px;
 }
 
 #input-line {
     display: flex;
     align-items: center;
-    margin-top: 10px;
-    padding-top: 10px;
+    margin-top: 8px;
+    padding-top: 8px;
     border-top: 1px solid #00ff0044;
 }
 
@@ -80,36 +120,6 @@ body {
 
 #command-input::placeholder {
     color: #00ff0066;
-}
-
-#sprite-panel {
-    width: 280px;
-    background: #0d0d0d;
-    border: 2px solid #00ff00;
-    border-radius: 8px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
-}
-
-#current-sprite {
-    max-width: 240px;
-    max-height: 240px;
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
-    border: 2px solid #00ff00;
-    margin-bottom: 15px;
-}
-
-#sprite-label {
-    color: #00ff00;
-    text-align: center;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
 }
 
 /* Text output line styling */
@@ -236,28 +246,21 @@ body {
     }
 
     #game-container {
-        flex-direction: column;
-        height: auto;
-        min-height: calc(100vh - 20px);
+        height: calc(100vh - 20px);
     }
 
     #sprite-panel {
-        width: 100%;
-        order: -1;
         padding: 15px;
     }
 
-    #current-sprite {
-        max-width: 150px;
-        max-height: 150px;
-    }
-
     #terminal {
-        min-height: 60vh;
+        height: 180px;
+        min-height: 180px;
+        max-height: 180px;
+        font-size: 13px;
     }
 
-    #terminal,
-    #sprite-panel {
+    #sprite-label {
         font-size: 14px;
     }
 }

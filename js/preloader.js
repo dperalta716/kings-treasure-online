@@ -23,6 +23,7 @@ const SPRITES = [
     'assets/sprites/locations/forgotten_coliseum.webp',
     'assets/sprites/locations/treasure.webp',
     'assets/sprites/locations/game_over.webp',
+    'assets/sprites/locations/level_up.webp',
 
     // Enemies
     'assets/sprites/enemies/skeleton_bandits.webp',

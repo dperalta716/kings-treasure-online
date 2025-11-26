@@ -4,7 +4,7 @@
 import { Enemy } from './character.js';
 import {
     ENEMY_DATA, WEAPON_DAMAGE, WEAPON_DROPS, SPECIAL_ITEM_DROPS, SPELLS,
-    getEnemySprite, getDefeatedEnemySprite, getWeaponSprite, getItemSprite, getShieldSprite
+    getEnemySprite, getDefeatedEnemySprite, getWeaponSprite, getItemSprite, getShieldSprite, getLocationSprite
 } from './constants.js';
 
 /**
@@ -455,11 +455,15 @@ export class Battle {
         this.character.gold += this.enemy.goldReward;
         this.terminal.print(`You gained ${this.terminal.xpText(this.enemy.xpReward)}! You found ${this.terminal.goldText(this.enemy.goldReward)}!`);
         const levelUps = this.character.gainXp(this.enemy.xpReward);
+        await this.terminal.waitForEnter();
 
         // Handle level ups
         for (const levelUp of levelUps) {
+            this.terminal.showSprite(getLocationSprite('level_up'), 'Level Up!');
             this.terminal.levelUpBanner();
             this.terminal.print(`You are now level [magenta]${levelUp.newLevel}[/magenta]!`);
+            await this.terminal.waitForEnter();
+
             this.terminal.print(`HP increased by [green]+${levelUp.hpGain}[/green]`);
             this.terminal.print(`Attack increased by [red]+${levelUp.attackGain}[/red]`);
             this.terminal.print(`Defense increased by [cyan]+${levelUp.defenseGain}[/cyan]`);

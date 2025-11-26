@@ -343,7 +343,7 @@ export const LEVEL_UP_BONUSES = {
 
 export function getSpritePath(type, name) {
     // Convert name to filename format (lowercase, underscores)
-    const filename = name.toLowerCase().replace(/['\s]/g, '_').replace(/_+/g, '_');
+    const filename = name.toLowerCase().replace(/'/g, '').replace(/\s+/g, '_');
     return `assets/sprites/${type}/${filename}.png`;
 }
 

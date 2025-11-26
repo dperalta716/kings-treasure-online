@@ -537,8 +537,7 @@ export class Battle {
             this.terminal.showSprite(getWeaponSprite(drop.becomesWeapon), drop.name);
         } else {
             // Try to find item sprite
-            const itemName = drop.name.toLowerCase().replace(/['\s]/g, '_');
-            this.terminal.showSprite(getItemSprite(itemName), drop.name);
+            this.terminal.showSprite(getItemSprite(drop.name), drop.name);
         }
 
         this.terminal.print(`\n[yellow]*** SPECIAL ITEM: ${drop.name.toUpperCase()} ***[/yellow]`);

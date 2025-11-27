@@ -81,12 +81,14 @@ export function calculateDamage(attacker, defender, isPlayer = true) {
         damage = Math.max(WEAPON_DAMAGE[attacker.weapon] || 3, damage - defenderDefense);
     }
 
-    // Shark Amulet doubles damage
+    // Shark Amulet doubles damage for the entire battle
     let amuletUsed = false;
-    if (isPlayer && attacker.hasSharkAmulet && !attacker.sharkAmuletUsed) {
+    if (isPlayer && attacker.hasSharkAmulet) {
         damage *= 2;
-        attacker.sharkAmuletUsed = true;
-        amuletUsed = true;
+        if (!attacker.sharkAmuletUsed) {
+            attacker.sharkAmuletUsed = true;  // Mark as used for consumption after battle
+            amuletUsed = true;  // Show message only on first attack
+        }
     }
 
     // Echo Blade double strike

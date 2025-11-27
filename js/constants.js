@@ -49,7 +49,7 @@ export const ENEMY_DATA = {
     clockmaker: { name: "Time Warden", hp: 72, attack: 26, defense: 7, xp: 120, gold: 58, isBoss: true },
 
     // Forgotten Coliseum
-    gladiator_shade: { name: "Gladiator Shade", hp: 52, attack: 18, defense: 5, xp: 95, gold: 44, isBoss: false },
+    gladiator_shade: { name: "Gladiator Shade", hp: 55, attack: 18, defense: 5, xp: 95, gold: 44, isBoss: false },
     arena_master: { name: "Arena Master", hp: 65, attack: 20, defense: 6, xp: 108, gold: 50, isBoss: false },
     eternal_champion: { name: "The Eternal Champion", hp: 75, attack: 28, defense: 8, xp: 125, gold: 62, isBoss: true }
 };

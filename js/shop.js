@@ -325,6 +325,7 @@ export class Shop {
 
         this.character.gold -= price;
         this.character.weapon = name;
+        this.terminal.sidebar.updateHero(this.character);
         this.terminal.print(`\nYou purchased and equipped the ${name}!`);
         this.terminal.print(`You have ${this.terminal.goldText(this.character.gold)} remaining.`);
     }
@@ -349,6 +350,7 @@ export class Shop {
 
         this.character.gold -= price;
         this.character.shield = name;
+        this.terminal.sidebar.updateHero(this.character);
         this.terminal.print(`\nYou purchased and equipped the ${name}!`);
         this.terminal.print(`You have ${this.terminal.goldText(this.character.gold)} remaining.`);
     }
@@ -384,6 +386,7 @@ export class Shop {
             this.terminal.print("You feel more protected! You'll take less damage in your next battle.");
         }
 
+        this.terminal.sidebar.updateHero(this.character);
         this.terminal.print(`You have ${this.terminal.goldText(this.character.gold)} remaining.`);
     }
 
@@ -422,6 +425,7 @@ export class Shop {
             this.terminal.print("Your defense will be increased by +5 for your next battle.");
         }
 
+        this.terminal.sidebar.updateHero(this.character);
         this.terminal.print(`You have ${this.terminal.goldText(this.character.gold)} remaining.`);
     }
 
@@ -451,6 +455,7 @@ export class Shop {
         this.character.gold -= price;
         this.character.spells.push(name);
 
+        this.terminal.sidebar.updateHero(this.character);
         this.terminal.print(`\nYou have learned [magenta]${name}[/magenta]!`);
         this.terminal.print("The spell has been added to your spellbook.");
         this.terminal.print(`You have ${this.terminal.goldText(this.character.gold)} remaining.`);

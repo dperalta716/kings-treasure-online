@@ -26,32 +26,32 @@ export const ENEMY_DATA = {
 
     // Convergence Paths (Player Level 3, HP 50-60)
     // Crystal Palace
-    crystal_guardian: { name: "Crystal Guardian", hp: 45, attack: 13, defense: 3, xp: 85, gold: 35, isBoss: false },
-    crystal_queen: { name: "Crystal Queen", hp: 55, attack: 16, defense: 4, xp: 95, gold: 42, isBoss: true },
+    crystal_guardian: { name: "Crystal Guardian", hp: 45, attack: 14, defense: 3, xp: 85, gold: 35, isBoss: false },
+    crystal_queen: { name: "Crystal Queen", hp: 55, attack: 18, defense: 4, xp: 95, gold: 42, isBoss: true },
 
     // Volcanic Forge
-    fire_elemental: { name: "Fire Elemental", hp: 42, attack: 14, defense: 2, xp: 80, gold: 35, isBoss: false },
-    forge_master: { name: "Forge Master", hp: 58, attack: 17, defense: 5, xp: 100, gold: 45, isBoss: true },
+    fire_elemental: { name: "Fire Elemental", hp: 42, attack: 15, defense: 2, xp: 80, gold: 35, isBoss: false },
+    forge_master: { name: "Forge Master", hp: 58, attack: 20, defense: 5, xp: 100, gold: 45, isBoss: true },
 
     // Sunken Ruins
-    merfolk_warrior: { name: "Merfolk Warrior", hp: 44, attack: 13, defense: 3, xp: 85, gold: 35, isBoss: false },
-    kraken: { name: "Kraken", hp: 60, attack: 18, defense: 4, xp: 105, gold: 48, isBoss: true },
+    merfolk_warrior: { name: "Merfolk Warrior", hp: 44, attack: 14, defense: 3, xp: 85, gold: 35, isBoss: false },
+    kraken: { name: "Kraken", hp: 60, attack: 22, defense: 4, xp: 105, gold: 48, isBoss: true },
 
     // Grand Finale (Player Level 4+, HP 60-70)
     // Phantom Citadel
-    spectral_sentinel: { name: "Spectral Sentinel", hp: 48, attack: 15, defense: 4, xp: 90, gold: 40, isBoss: false },
-    phantom_knight: { name: "Phantom Knight", hp: 55, attack: 16, defense: 5, xp: 100, gold: 45, isBoss: false },
-    lord_of_echoes: { name: "Lord of Echoes", hp: 70, attack: 20, defense: 6, xp: 115, gold: 55, isBoss: true },
+    spectral_sentinel: { name: "Spectral Sentinel", hp: 48, attack: 17, defense: 4, xp: 90, gold: 40, isBoss: false },
+    phantom_knight: { name: "Phantom Knight", hp: 55, attack: 19, defense: 5, xp: 100, gold: 45, isBoss: false },
+    lord_of_echoes: { name: "Lord of Echoes", hp: 70, attack: 24, defense: 6, xp: 115, gold: 55, isBoss: true },
 
     // Clockwork Nexus
-    automaton_soldier: { name: "Automaton Soldier", hp: 50, attack: 15, defense: 5, xp: 92, gold: 42, isBoss: false },
-    time_warden: { name: "The Clockmaker", hp: 58, attack: 17, defense: 5, xp: 105, gold: 48, isBoss: false },
-    clockmaker: { name: "Time Warden", hp: 72, attack: 21, defense: 7, xp: 120, gold: 58, isBoss: true },
+    automaton_soldier: { name: "Automaton Soldier", hp: 50, attack: 18, defense: 5, xp: 92, gold: 42, isBoss: false },
+    time_warden: { name: "The Clockmaker", hp: 58, attack: 20, defense: 5, xp: 105, gold: 48, isBoss: false },
+    clockmaker: { name: "Time Warden", hp: 72, attack: 26, defense: 7, xp: 120, gold: 58, isBoss: true },
 
     // Forgotten Coliseum
-    gladiator_shade: { name: "Gladiator Shade", hp: 52, attack: 15, defense: 5, xp: 95, gold: 44, isBoss: false },
-    arena_master: { name: "Arena Master", hp: 60, attack: 17, defense: 6, xp: 108, gold: 50, isBoss: false },
-    eternal_champion: { name: "The Eternal Champion", hp: 75, attack: 22, defense: 8, xp: 125, gold: 62, isBoss: true }
+    gladiator_shade: { name: "Gladiator Shade", hp: 52, attack: 18, defense: 5, xp: 95, gold: 44, isBoss: false },
+    arena_master: { name: "Arena Master", hp: 60, attack: 20, defense: 6, xp: 108, gold: 50, isBoss: false },
+    eternal_champion: { name: "The Eternal Champion", hp: 75, attack: 28, defense: 8, xp: 125, gold: 62, isBoss: true }
 };
 
 // =============================================================================

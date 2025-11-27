@@ -67,7 +67,7 @@ export const WEAPON_DAMAGE = {
     "Steel Sword": 6,
     "Battle Axe": 7,
     "Knight's Blade": 8,
-    "Enchanted Sword": 9,
+    "Enchanted Sword": 8,
     "Dragonslayer": 10,
 
     // Hidden Passages weapons

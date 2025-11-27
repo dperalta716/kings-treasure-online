@@ -14,9 +14,9 @@ export const ENEMY_DATA = {
     shark: { name: "Ferocious Shark", hp: 22, attack: 6, defense: 1, xp: 55, gold: 20, isBoss: false },
     lake_monster: { name: "Lake Monster", hp: 28, attack: 8, defense: 0, xp: 65, gold: 25, isBoss: false },
 
-    // Castle guardians - Buffed to challenge Level 2 players
-    bear_rider: { name: "Savage Bear Rider", hp: 32, attack: 11, defense: 2, xp: 70, gold: 28, isBoss: false },
-    dragon_knight: { name: "Dragon Knight", hp: 38, attack: 12, defense: 3, xp: 80, gold: 32, isBoss: false },
+    // Castle guardians - Faced at Level 1
+    bear_rider: { name: "Savage Bear Rider", hp: 32, attack: 9, defense: 2, xp: 70, gold: 28, isBoss: false },
+    dragon_knight: { name: "Dragon Knight", hp: 38, attack: 10, defense: 3, xp: 80, gold: 32, isBoss: false },
 
     // Mid Game - Hidden Passages (Player Level 2-3) - MAJOR BUFFS to counter high defense
     stone_golem: { name: "Stone Golem", hp: 40, attack: 14, defense: 5, xp: 75, gold: 30, isBoss: false },

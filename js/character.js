@@ -136,28 +136,26 @@ export class Character {
     }
 
     /**
-     * Use a health potion
+     * Use a health potion (heals 25 HP, not full)
      */
     usePotion() {
         if (this.potions <= 0) return false;
 
         this.potions--;
-        const healAmount = this.maxHp - this.hp;
-        this.hp = this.maxHp;
+        const healAmount = Math.min(25, this.maxHp - this.hp);
+        this.hp = Math.min(this.maxHp, this.hp + 25);
         return healAmount;
     }
 
     /**
-     * Use a superior health potion
+     * Use a superior health potion (heals 40 HP, not full)
      */
     useSuperiorPotion() {
         if (this.superiorPotions <= 0) return false;
 
         this.superiorPotions--;
-        this.tempHpBoost = 10;
-        this.maxHp = this.baseMaxHp + this.tempHpBoost;
-        const healAmount = this.maxHp - this.hp;
-        this.hp = this.maxHp;
+        const healAmount = Math.min(40, this.maxHp - this.hp);
+        this.hp = Math.min(this.maxHp, this.hp + 40);
         return healAmount;
     }
 

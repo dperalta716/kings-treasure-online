@@ -8,50 +8,50 @@
 // Format: enemy_type -> { name, hp, attack, defense, xp, gold, isBoss, art }
 
 export const ENEMY_DATA = {
-    // Early Game (Player Level 1-2, HP 30-40)
+    // Early Game (Player Level 1-2, HP 30-40) - Keep similar, balanced for new players
     skeleton_bandits: { name: "Skeleton Bandits", hp: 22, attack: 6, defense: 1, xp: 55, gold: 20, isBoss: false },
-    wizard: { name: "Evil Wizard", hp: 28, attack: 7, defense: 0, xp: 65, gold: 25, isBoss: false },
+    wizard: { name: "Evil Wizard", hp: 28, attack: 8, defense: 0, xp: 65, gold: 25, isBoss: false },
     shark: { name: "Ferocious Shark", hp: 22, attack: 6, defense: 1, xp: 55, gold: 20, isBoss: false },
-    lake_monster: { name: "Lake Monster", hp: 28, attack: 7, defense: 0, xp: 65, gold: 25, isBoss: false },
+    lake_monster: { name: "Lake Monster", hp: 28, attack: 8, defense: 0, xp: 65, gold: 25, isBoss: false },
 
-    // Castle guardians
-    bear_rider: { name: "Savage Bear Rider", hp: 32, attack: 8, defense: 2, xp: 70, gold: 28, isBoss: false },
-    dragon_knight: { name: "Dragon Knight", hp: 38, attack: 9, defense: 3, xp: 80, gold: 32, isBoss: false },
+    // Castle guardians - Buffed to challenge Level 2 players
+    bear_rider: { name: "Savage Bear Rider", hp: 32, attack: 11, defense: 2, xp: 70, gold: 28, isBoss: false },
+    dragon_knight: { name: "Dragon Knight", hp: 38, attack: 12, defense: 3, xp: 80, gold: 32, isBoss: false },
 
-    // Mid Game - Hidden Passages (Player Level 2-3, HP 40-50)
-    stone_golem: { name: "Stone Golem", hp: 40, attack: 8, defense: 5, xp: 75, gold: 30, isBoss: false },
-    giant_spider: { name: "Giant Spider", hp: 32, attack: 9, defense: 2, xp: 70, gold: 28, isBoss: false },
-    ancient_guardian: { name: "Ancient Guardian", hp: 42, attack: 9, defense: 4, xp: 80, gold: 32, isBoss: false },
-    cursed_mummy: { name: "Cursed Mummy", hp: 28, attack: 11, defense: 1, xp: 75, gold: 30, isBoss: false },
+    // Mid Game - Hidden Passages (Player Level 2-3) - MAJOR BUFFS to counter high defense
+    stone_golem: { name: "Stone Golem", hp: 40, attack: 14, defense: 5, xp: 75, gold: 30, isBoss: false },
+    giant_spider: { name: "Giant Spider", hp: 32, attack: 14, defense: 2, xp: 70, gold: 28, isBoss: false },
+    ancient_guardian: { name: "Ancient Guardian", hp: 42, attack: 15, defense: 4, xp: 80, gold: 32, isBoss: false },
+    cursed_mummy: { name: "Cursed Mummy", hp: 28, attack: 16, defense: 1, xp: 75, gold: 30, isBoss: false },
 
-    // Convergence Paths (Player Level 3, HP 50-60)
+    // Convergence Paths (Player Level 3, HP 50-60) - Bosses significantly buffed
     // Crystal Palace
-    crystal_guardian: { name: "Crystal Guardian", hp: 45, attack: 11, defense: 3, xp: 85, gold: 35, isBoss: false },
-    crystal_queen: { name: "Crystal Queen", hp: 55, attack: 14, defense: 4, xp: 95, gold: 42, isBoss: true },
+    crystal_guardian: { name: "Crystal Guardian", hp: 45, attack: 14, defense: 3, xp: 85, gold: 35, isBoss: false },
+    crystal_queen: { name: "Crystal Queen", hp: 55, attack: 20, defense: 4, xp: 95, gold: 42, isBoss: true },
 
     // Volcanic Forge
-    fire_elemental: { name: "Fire Elemental", hp: 42, attack: 12, defense: 2, xp: 80, gold: 35, isBoss: false },
-    forge_master: { name: "Forge Master", hp: 58, attack: 15, defense: 5, xp: 100, gold: 45, isBoss: true },
+    fire_elemental: { name: "Fire Elemental", hp: 42, attack: 15, defense: 2, xp: 80, gold: 35, isBoss: false },
+    forge_master: { name: "Forge Master", hp: 58, attack: 22, defense: 5, xp: 100, gold: 45, isBoss: true },
 
     // Sunken Ruins
-    merfolk_warrior: { name: "Merfolk Warrior", hp: 44, attack: 11, defense: 3, xp: 85, gold: 35, isBoss: false },
-    kraken: { name: "Kraken", hp: 60, attack: 16, defense: 4, xp: 105, gold: 48, isBoss: true },
+    merfolk_warrior: { name: "Merfolk Warrior", hp: 44, attack: 14, defense: 3, xp: 85, gold: 35, isBoss: false },
+    kraken: { name: "Kraken", hp: 60, attack: 24, defense: 4, xp: 105, gold: 48, isBoss: true },
 
-    // Grand Finale (Player Level 4+, HP 60-70)
+    // Grand Finale (Player Level 4+, HP 60-70) - All enemies and bosses heavily buffed
     // Phantom Citadel
-    spectral_sentinel: { name: "Spectral Sentinel", hp: 48, attack: 13, defense: 4, xp: 90, gold: 40, isBoss: false },
-    phantom_knight: { name: "Phantom Knight", hp: 55, attack: 15, defense: 5, xp: 100, gold: 45, isBoss: false },
-    lord_of_echoes: { name: "Lord of Echoes", hp: 70, attack: 17, defense: 6, xp: 115, gold: 55, isBoss: true },
+    spectral_sentinel: { name: "Spectral Sentinel", hp: 48, attack: 18, defense: 4, xp: 90, gold: 40, isBoss: false },
+    phantom_knight: { name: "Phantom Knight", hp: 55, attack: 20, defense: 5, xp: 100, gold: 45, isBoss: false },
+    lord_of_echoes: { name: "Lord of Echoes", hp: 70, attack: 26, defense: 6, xp: 115, gold: 55, isBoss: true },
 
     // Clockwork Nexus
-    automaton_soldier: { name: "Automaton Soldier", hp: 50, attack: 14, defense: 5, xp: 92, gold: 42, isBoss: false },
-    time_warden: { name: "The Clockmaker", hp: 58, attack: 16, defense: 5, xp: 105, gold: 48, isBoss: false },
-    clockmaker: { name: "Time Warden", hp: 72, attack: 18, defense: 7, xp: 120, gold: 58, isBoss: true },
+    automaton_soldier: { name: "Automaton Soldier", hp: 50, attack: 19, defense: 5, xp: 92, gold: 42, isBoss: false },
+    time_warden: { name: "The Clockmaker", hp: 58, attack: 21, defense: 5, xp: 105, gold: 48, isBoss: false },
+    clockmaker: { name: "Time Warden", hp: 72, attack: 28, defense: 7, xp: 120, gold: 58, isBoss: true },
 
     // Forgotten Coliseum
-    gladiator_shade: { name: "Gladiator Shade", hp: 52, attack: 14, defense: 5, xp: 95, gold: 44, isBoss: false },
-    arena_master: { name: "Arena Master", hp: 60, attack: 16, defense: 6, xp: 108, gold: 50, isBoss: false },
-    eternal_champion: { name: "The Eternal Champion", hp: 75, attack: 18, defense: 8, xp: 125, gold: 62, isBoss: true }
+    gladiator_shade: { name: "Gladiator Shade", hp: 52, attack: 19, defense: 5, xp: 95, gold: 44, isBoss: false },
+    arena_master: { name: "Arena Master", hp: 60, attack: 22, defense: 6, xp: 108, gold: 50, isBoss: false },
+    eternal_champion: { name: "The Eternal Champion", hp: 75, attack: 30, defense: 8, xp: 125, gold: 62, isBoss: true }
 };
 
 // =============================================================================
@@ -257,7 +257,7 @@ export const SHOP_SHIELDS = {
 };
 
 export const SHOP_POTIONS = {
-    "Health Potion": { price: 15, effect: "Restores full HP" },
+    "Health Potion": { price: 15, effect: "Restores 25 HP" },
     "Strength Elixir": { price: 20, effect: "+2 attack for one battle" },
     "Defense Potion": { price: 20, effect: "+2 defense for one battle" }
 };
@@ -273,7 +273,7 @@ export const ADVANCED_SHOP_SHIELDS = {
 };
 
 export const ADVANCED_SHOP_POTIONS = {
-    "Superior Health Potion": { price: 40, effect: "Full heal + 10 temp HP" },
+    "Superior Health Potion": { price: 40, effect: "Restores 40 HP" },
     "Master's Strength Elixir": { price: 45, effect: "+5 attack for one battle" },
     "Ultimate Defense Potion": { price: 45, effect: "+5 defense for one battle" }
 };
@@ -281,7 +281,7 @@ export const ADVANCED_SHOP_POTIONS = {
 export const SHOP_SPELLS = {
     "Thunderbolt": { price: 70, description: "Call lightning (Attack + 15 damage)" },
     "Time Freeze": { price: 85, description: "Take an extra turn" },
-    "Soul Drain": { price: 80, description: "Deal 20 damage and heal same amount" }
+    "Soul Drain": { price: 80, description: "Deal 12 damage and heal same amount" }
 };
 
 // =============================================================================
@@ -321,9 +321,9 @@ export const SPELLS = {
     "Soul Drain": {
         unlockLevel: null,  // Shop only
         type: "damageAndHeal",
-        damage: 20,
+        damage: 12,
         healPercent: 100,
-        description: "Deal 20 damage and heal for same amount"
+        description: "Deal 12 damage and heal for same amount"
     }
 };
 

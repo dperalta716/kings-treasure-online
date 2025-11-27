@@ -372,7 +372,7 @@ export class Battle {
         let isCritical = false;
         if (this.isBossBattle) {
             let critChance = 0.25;
-            let critMultiplier = 2.0;
+            let critMultiplier = 1.5;
 
             if (this.enemy.name === "Kraken") {
                 critChance = 0.10;

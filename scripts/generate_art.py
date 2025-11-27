@@ -27,7 +27,11 @@ except ImportError as e:
     sys.exit(1)
 
 # Configuration
-API_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyAGN0X7Hjch7wf5XGIATqii7GQELqbNOTg")
+API_KEY = os.environ.get("GEMINI_API_KEY")
+if not API_KEY:
+    print("Error: GEMINI_API_KEY environment variable not set")
+    print("Get a key at: https://aistudio.google.com/apikey")
+    sys.exit(1)
 SCRIPT_DIR = Path(__file__).parent
 PROJECT_DIR = SCRIPT_DIR.parent
 SPRITES_DIR = PROJECT_DIR / "assets" / "sprites"

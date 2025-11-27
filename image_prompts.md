@@ -755,6 +755,17 @@ in gold wire, leather cord with shells, displayed on coral stand,
 pirate treasure hoard background
 ```
 
+### Shark Tooth Amulet (Crumbled)
+**ID:** `shark_tooth_amulet_crumbled`
+**Category:** special_items
+
+```
+16-bit pixel art, dark fantasy RPG game sprite, detailed shading,
+vibrant colors, crumbling shark tooth amulet turning to dust,
+magical energy dissipating, fragments floating away,
+pirate treasure hoard background
+```
+
 ### strength_elixir
 **ID:** `strength_elixir`
 **Category:** special_items

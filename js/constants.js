@@ -15,7 +15,7 @@ export const ENEMY_DATA = {
     lake_monster: { name: "Lake Monster", hp: 28, attack: 8, defense: 0, xp: 65, gold: 25, isBoss: false },
 
     // Castle guardians - Faced at Level 1
-    bear_rider: { name: "Savage Bear Rider", hp: 32, attack: 9, defense: 2, xp: 70, gold: 28, isBoss: false },
+    bear_rider: { name: "Savage Bear Rider", hp: 32, attack: 8, defense: 2, xp: 70, gold: 28, isBoss: false },
     dragon_knight: { name: "Dragon Knight", hp: 38, attack: 10, defense: 3, xp: 80, gold: 32, isBoss: false },
 
     // Mid Game - Hidden Passages (Player Level 2-3) - MAJOR BUFFS to counter high defense
@@ -62,8 +62,8 @@ export const ENEMY_DATA = {
 export const WEAPON_DAMAGE = {
     // Starting and early game weapons
     "Rusty Sword": 3,
-    "Iron Dagger": 4,
-    "Bronze Mace": 5,
+    "Iron Dagger": 5,
+    "Bronze Mace": 6,
     "Steel Sword": 6,
     "Battle Axe": 7,
     "Knight's Blade": 8,

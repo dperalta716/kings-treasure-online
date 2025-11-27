@@ -22,7 +22,7 @@ export const ENEMY_DATA = {
     stone_golem: { name: "Stone Golem", hp: 40, attack: 14, defense: 5, xp: 75, gold: 30, isBoss: false },
     giant_spider: { name: "Giant Spider", hp: 32, attack: 14, defense: 2, xp: 70, gold: 28, isBoss: false },
     ancient_guardian: { name: "Ancient Guardian", hp: 42, attack: 15, defense: 4, xp: 80, gold: 32, isBoss: false },
-    cursed_mummy: { name: "Cursed Mummy", hp: 28, attack: 16, defense: 1, xp: 75, gold: 30, isBoss: false },
+    cursed_mummy: { name: "Cursed Mummy", hp: 45, attack: 16, defense: 1, xp: 75, gold: 30, isBoss: false },
 
     // Convergence Paths (Player Level 3, HP 50-60)
     // Crystal Palace

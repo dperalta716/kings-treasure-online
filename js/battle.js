@@ -4,7 +4,7 @@
 import { Enemy } from './character.js';
 import {
     ENEMY_DATA, WEAPON_DAMAGE, WEAPON_DROPS, SPECIAL_ITEM_DROPS, SPELLS,
-    getEnemySprite, getDefeatedEnemySprite, getWeaponSprite, getItemSprite, getShieldSprite, getLocationSprite
+    getEnemySprite, getDefeatedEnemySprite, getEnemyBattleSprite, getWeaponSprite, getItemSprite, getShieldSprite, getLocationSprite
 } from './constants.js';
 
 /**
@@ -118,6 +118,7 @@ export class Battle {
         this.isBossBattle = this.enemy.isBoss;
         this.saveMenu = saveMenu;
         this.location = location;
+        this.showedBattleSprite = false;
     }
 
     /**
@@ -354,6 +355,15 @@ export class Battle {
      * Enemy's turn
      */
     async enemyTurn() {
+        // Flash to battle sprite on first attack
+        if (!this.showedBattleSprite) {
+            await this.terminal.showBattleSprite(
+                getEnemyBattleSprite(this.enemyType),
+                this.enemy.name
+            );
+            this.showedBattleSprite = true;
+        }
+
         this.terminal.print(`\n[red][bold]${this.enemy.name}[/bold]'s turn![/red]`);
 
         // Miss chance

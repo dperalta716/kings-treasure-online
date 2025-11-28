@@ -159,6 +159,27 @@ export class Terminal {
     }
 
     /**
+     * Display battle sprite with flash-to-white transition
+     */
+    async showBattleSprite(src, label) {
+        // Add flash class
+        this.sprite.classList.add('flash-attack');
+
+        // Wait for flash midpoint (200ms)
+        await this.delay(200);
+
+        // Swap image during white flash
+        this.sprite.src = src;
+        this.spriteLabel.textContent = label;
+
+        // Wait for animation to complete
+        await this.delay(200);
+
+        // Remove flash class
+        this.sprite.classList.remove('flash-attack');
+    }
+
+    /**
      * Display a sprite image with fade transition
      */
     showSprite(src, label = '') {

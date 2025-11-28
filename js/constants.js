@@ -355,6 +355,10 @@ export function getDefeatedEnemySprite(enemyType) {
     return `assets/sprites/enemies/${enemyType}_defeated.webp`;
 }
 
+export function getEnemyBattleSprite(enemyType) {
+    return `assets/sprites/enemies/${enemyType}_battle.webp`;
+}
+
 export function getWeaponSprite(weaponName) {
     const filename = weaponName.toLowerCase().replace(/'/g, '').replace(/\s+/g, '_');
     return `assets/sprites/weapons/${filename}.webp`;

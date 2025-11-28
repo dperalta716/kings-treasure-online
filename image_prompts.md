@@ -20,18 +20,7 @@ python scripts/generate_art.py --info iron_dagger
 
 ## Adding New Prompts
 
-Use this format (keep format intact for parser):
-
-```
-### Display Name
-**ID:** `item_id`
-**Category:** enemies|weapons|shields|special_items|locations|spells|potions
-
-(three backticks)
-16-bit pixel art, dark fantasy RPG game sprite, detailed shading,
-vibrant colors, [description of the item/enemy/location]
-(three backticks)
-```
+See existing entries below for format. Categories: enemies, weapons, shields, special_items, locations, spells, potions
 
 ---
 
@@ -1057,4 +1046,16 @@ from storm clouds, electrical crackling, devastating power
 vibrant colors, ancient leather-bound spellbook crackling with
 lightning energy, storm clouds on cover, displayed on wizard
 lectern, storm tower background
+```
+
+### time_freeze
+**ID:** `time_freeze`
+**Category:** spells
+
+```
+16-bit pixel art, dark fantasy RPG game effect sprite, detailed
+shading, vibrant colors, glowing hourglass frozen mid-flow with
+sand suspended in air, swirling clock hands and gears floating,
+purple and gold temporal energy radiating outward, crystallized
+time fragments, clockwork citadel background
 ```

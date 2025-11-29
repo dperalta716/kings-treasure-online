@@ -55,13 +55,13 @@ export class Game {
             this.character = new Character("Hero");
             // Set up a character ready for advanced shop / final boss testing
             this.character.level = 5;
-            this.character.baseMaxHp = 55;
-            this.character.maxHp = 55;
-            this.character.hp = 55;
+            this.character.baseMaxHp = 60;
+            this.character.maxHp = 60;
+            this.character.hp = 60;
             this.character.attack = 12;
             this.character.defense = 6;
             this.character.gold = 204;
-            this.character.weapon = "Fine Bow";
+            this.character.weapon = "Trident of the Depths";
             this.character.shield = "Knight's Shield";
             this.character.potions = 3;
             this.character.spells = ['Arcane Blast', 'Energy Surge', 'Astral Strike'];

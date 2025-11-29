@@ -53,21 +53,33 @@ export class Game {
         this.terminal.showSprite(getCharacterSprite(`${gender}_warrior`), 'Warrior');
 
         this.terminal.print("\n[bold]Choose Your Path[/bold]");
-        this.terminal.print("[dim](Type a number + Enter to preview, then Enter again to confirm)[/dim]\n");
+        this.terminal.print("[dim](Use arrows or type 1-3 to preview, Enter to confirm)[/dim]\n");
         this.terminal.print("1. [red]WARRIOR[/red] - A battle-hardened soldier");
         this.terminal.print("   HP: 30 | ATK: 5 | DEF: 2");
         this.terminal.print("\n2. [magenta]MAGE[/magenta] - A wielder of arcane power");
         this.terminal.print("   HP: 25 | ATK: 6 | DEF: 1 | +25% spell damage, Mana Bolt");
         this.terminal.print("\n3. [cyan]ROGUE[/cyan] - A cunning critical striker");
-        this.terminal.print("   HP: 28 | ATK: 5 | DEF: 1 | 30% critical hit chance");
+        this.terminal.print("   HP: 28 | ATK: 5 | DEF: 1 | 35% critical hit chance");
 
         const classMap = { '1': 'warrior', '2': 'mage', '3': 'rogue' };
         const classNames = { 'warrior': 'Warrior', 'mage': 'Mage', 'rogue': 'Rogue' };
+        const classList = ['warrior', 'mage', 'rogue'];
+        let classIndex = 0;
 
         while (true) {
             const input = await this.terminal.prompt();
             if (classMap[input]) {
                 previewClass = classMap[input];
+                classIndex = classList.indexOf(previewClass);
+                this.terminal.showSprite(getCharacterSprite(`${gender}_${previewClass}`), classNames[previewClass]);
+            } else if (input === '__UP__' || input === '__DOWN__') {
+                // Arrow key navigation
+                if (input === '__UP__') {
+                    classIndex = (classIndex - 1 + classList.length) % classList.length;
+                } else {
+                    classIndex = (classIndex + 1) % classList.length;
+                }
+                previewClass = classList[classIndex];
                 this.terminal.showSprite(getCharacterSprite(`${gender}_${previewClass}`), classNames[previewClass]);
             } else if (input === '') {
                 // Enter confirms current preview
@@ -86,7 +98,7 @@ export class Game {
         if (previewClass === 'mage') {
             this.terminal.print("\n[cyan]You start with the Mana Bolt spell![/cyan]");
         } else if (previewClass === 'rogue') {
-            this.terminal.print("\n[cyan]Your critical hit chance is 30%![/cyan]");
+            this.terminal.print("\n[cyan]Your critical hit chance is 35%![/cyan]");
         }
 
         this.terminal.print("\nPress Enter to begin your adventure...", 'dim');

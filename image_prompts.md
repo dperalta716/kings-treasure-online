@@ -1138,13 +1138,14 @@ trees, no text, no UI elements, no game interface
 **Category:** characters
 
 ```
-16-bit pixel art, dark fantasy RPG game character sprite, detailed
-shading, vibrant colors, strong muscular male warrior in brown
-leather armor with metal studs, short dark hair, holding steel
-sword and round wooden shield with metal rim, confident battle
-stance, sunlit castle courtyard background with weathered stone
-walls covered in ivy, crossed swords mounted above an arched
-gateway, distant mountains visible through battlements
+16-bit dark fantasy RPG pixel art, detailed shading, realistic
+proportions, dramatic lighting, full body shot, male warrior in
+worn brown leather armor with iron studs and chainmail underneath,
+battle-scarred, long dark hair, gripping steel longsword and
+battered wooden shield, weathered face with determined expression,
+dynamic battle stance, dark misty forest background with fog
+rolling between ancient trees, moody atmosphere, no text, no UI
+elements
 ```
 
 ### Female Warrior
@@ -1152,13 +1153,13 @@ gateway, distant mountains visible through battlements
 **Category:** characters
 
 ```
-16-bit pixel art, dark fantasy RPG game character sprite, detailed
-shading, vibrant colors, athletic female warrior in brown leather
-armor with metal studs, long braided hair, holding steel sword
-and round wooden shield with metal rim, confident battle stance,
-sunlit castle courtyard background with weathered stone walls
-covered in ivy, crossed swords mounted above an arched gateway,
-distant mountains visible through battlements
+16-bit dark fantasy RPG pixel art, detailed shading, realistic
+proportions, dramatic lighting, athletic female warrior in worn
+brown leather armor with iron studs and chainmail underneath,
+long braided dark hair, gripping steel longsword and battered
+wooden shield, fierce expression with battle scars, confident
+combat stance, dark misty forest background with fog rolling
+between ancient trees, moody atmosphere, no text, no UI elements
 ```
 
 ### Male Mage
@@ -1166,13 +1167,14 @@ distant mountains visible through battlements
 **Category:** characters
 
 ```
-16-bit pixel art, dark fantasy RPG game character sprite, detailed
-shading, vibrant colors, male mage in flowing purple and blue robes,
-short beard, holding ornate mystic wand with glowing crystal tip,
-arcane energy swirling around hands, ancient wizard tower interior
-with towering bookshelves reaching into darkness, floating candles
-and glowing orbs, arcane circles etched into the stone floor,
-starlight streaming through a stained glass window
+16-bit dark fantasy RPG pixel art, detailed shading, realistic
+proportions, dramatic lighting, full body shot, young male sorcerer
+in flowing deep purple and midnight blue robes with silver arcane
+symbols, youthful handsome face with long dark hair, holding
+gnarled wooden staff with glowing crystal, mystical energy
+crackling around fingers, intense focused eyes, spell casting
+stance, dark misty forest background with fog rolling between
+ancient trees, moody atmosphere, no text, no UI elements
 ```
 
 ### Female Mage
@@ -1180,13 +1182,14 @@ starlight streaming through a stained glass window
 **Category:** characters
 
 ```
-16-bit pixel art, dark fantasy RPG game character sprite, detailed
-shading, vibrant colors, female mage in flowing purple and blue robes,
-long flowing hair, holding ornate mystic wand with glowing crystal tip,
-arcane energy swirling around hands, ancient wizard tower interior
-with towering bookshelves reaching into darkness, floating candles
-and glowing orbs, arcane circles etched into the stone floor,
-starlight streaming through a stained glass window
+16-bit dark fantasy RPG pixel art, detailed shading, realistic
+proportions, dramatic lighting, female sorceress in flowing deep
+purple and midnight blue robes with silver arcane symbols, long
+dark hair flowing with magical energy, holding elegant staff with
+glowing crystal, mystical power emanating from outstretched hand,
+intense focused eyes, dark misty forest background with fog
+rolling between ancient trees, moody atmosphere, no text, no UI
+elements
 ```
 
 ### Male Rogue
@@ -1194,13 +1197,13 @@ starlight streaming through a stained glass window
 **Category:** characters
 
 ```
-16-bit pixel art, dark fantasy RPG game character sprite, detailed
-shading, vibrant colors, male ranger in hooded dark green and brown
-cloth cloak, leather bracers and boots, rugged features like Aragorn,
-dual wielding curved daggers, stealthy crouched pose, midnight forest
-clearing with ancient twisted oak trees, silver moonlight piercing
-through dense canopy, wisps of fog curling around gnarled roots,
-distant campfire glow between the trees
+16-bit dark fantasy RPG pixel art, detailed shading, realistic
+proportions, dramatic lighting, full body shot, male rogue assassin
+in hooded dark leather armor with forest green cloak, weathered
+rugged face like Aragorn, stubble, sharp calculating eyes, dual
+wielding wicked curved daggers, dynamic battle stance, dangerous
+and silent, dark misty forest background with fog rolling between
+ancient trees, moody atmosphere, no text, no UI elements
 ```
 
 ### Female Rogue
@@ -1208,11 +1211,11 @@ distant campfire glow between the trees
 **Category:** characters
 
 ```
-16-bit pixel art, dark fantasy RPG game character sprite, detailed
-shading, vibrant colors, female ranger in hooded dark green and brown
-cloth cloak, leather bracers and boots, sharp features, dual wielding
-curved daggers, stealthy crouched pose, midnight forest clearing with
-ancient twisted oak trees, silver moonlight piercing through dense
-canopy, wisps of fog curling around gnarled roots, distant campfire
-glow between the trees
+16-bit dark fantasy RPG pixel art, detailed shading, realistic
+proportions, dramatic lighting, female rogue assassin in hooded
+dark leather armor with forest green cloak, sharp angular features,
+piercing eyes watching from shadow of hood, dual wielding wicked
+curved daggers, crouched predatory stance emerging from shadows,
+deadly and graceful, dark misty forest background with fog rolling
+between ancient trees, moody atmosphere, no text, no UI elements
 ```

@@ -438,7 +438,7 @@ export const CHARACTER_CLASSES = {
         defense: 1,
         weapon: "Twin Daggers",
         shield: "Leather Bracer",
-        passives: { critChanceBonus: 0.10 },
+        passives: { critChanceBonus: 0.15 },
         startingSpells: []
     }
 };

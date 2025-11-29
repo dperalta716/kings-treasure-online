@@ -91,7 +91,9 @@ export class Terminal {
      * Handle keydown events on input
      */
     handleKeydown(e) {
-        if (e.key === 'Enter' && this.inputActive) {
+        if (!this.inputActive) return;
+
+        if (e.key === 'Enter') {
             const value = this.input.value.trim();
             this.print(`> ${value}`, 'user-input');
             this.input.value = '';
@@ -101,6 +103,15 @@ export class Terminal {
             if (this.inputResolve) {
                 this.inputResolve(value);
                 this.inputResolve = null;
+            }
+        } else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (this.inputResolve) {
+                const direction = e.key === 'ArrowUp' ? '__UP__' : '__DOWN__';
+                this.inputResolve(direction);
+                this.inputResolve = null;
+                // Re-activate input for next prompt
+                this.inputActive = false;
             }
         }
     }

@@ -284,7 +284,7 @@ export const ADVANCED_SHOP_POTIONS = {
 export const SHOP_SPELLS = {
     "Thunderbolt": { price: 70, description: "Call lightning (Attack + 15 damage)" },
     "Time Freeze": { price: 85, description: "Attack and enemy skips next turn" },
-    "Soul Drain": { price: 80, description: "Deal 12 damage and heal same amount" }
+    "Soul Drain": { price: 80, description: "Deal 15 damage and heal same amount" }
 };
 
 // =============================================================================
@@ -324,9 +324,9 @@ export const SPELLS = {
     "Soul Drain": {
         unlockLevel: null,  // Shop only
         type: "damageAndHeal",
-        damage: 12,
+        damage: 15,
         healPercent: 100,
-        description: "Deal 12 damage and heal for same amount"
+        description: "Deal 15 damage and heal for same amount"
     }
 };
 

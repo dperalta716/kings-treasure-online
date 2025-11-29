@@ -133,6 +133,7 @@ export class Terminal {
             'bright-magenta': 'bright-magenta',
             'bright-blue': 'bright-blue',
             bold: 'bold',
+            italic: 'italic',
             dim: 'dim',
             critical: 'critical',
             victory: 'victory',

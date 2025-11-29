@@ -465,6 +465,7 @@ body {
 .bright-magenta { color: #ff66ff; }
 .bright-blue { color: #6666ff; }
 .bold { font-weight: bold; }
+.italic { font-style: italic; }
 .dim { opacity: 0.6; }
 
 /* Special text effects */

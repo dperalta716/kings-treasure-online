@@ -123,6 +123,7 @@ export class Terminal {
             yellow: 'yellow',
             cyan: 'cyan',
             magenta: 'magenta',
+            purple: 'purple',
             blue: 'blue',
             white: 'white',
             'bright-red': 'bright-red',

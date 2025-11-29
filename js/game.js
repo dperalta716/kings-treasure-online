@@ -54,10 +54,10 @@ export class Game {
         if (startInput.toLowerCase() === 'testboss') {
             this.character = new Character("Hero");
             // Set up a character ready for advanced shop / final boss testing
-            this.character.level = 5;
-            this.character.baseMaxHp = 75;
-            this.character.maxHp = 75;
-            this.character.hp = 75;
+            this.character.level = 4;
+            this.character.baseMaxHp = 65;
+            this.character.maxHp = 65;
+            this.character.hp = 65;
             this.character.attack = 12;
             this.character.defense = 6;
             this.character.gold = 204;

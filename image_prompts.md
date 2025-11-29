@@ -299,6 +299,22 @@ clock hands, floating hourglasses orbit around body, temporal rift
 background with fractured time streams and floating clock parts
 ```
 
+### The Treasure's Guardian
+**ID:** `treasures_guardian`
+**Category:** enemies
+
+```
+16-bit pixel art, dark fantasy RPG game sprite, detailed shading,
+vibrant colors, corrupted golden paladin standing guard, entire body
+encased in living liquid gold, flowing golden cloak, no helmet
+revealing face with long flowing golden hair also turned to gold,
+noble but weary expression, cracks throughout golden form revealing
+purple-violet corruption glowing beneath, holding ornate golden sword
+at rest, ancient stone chamber with vaulted ceilings, standing before
+grand ornate wooden double doors with golden fixtures, torch light
+casting warm glow, solemn guardian pose
+```
+
 ### Evil Wizard
 **ID:** `wizard`
 **Category:** enemies
@@ -951,6 +967,34 @@ rays, victory moment
 vibrant colors, massive underground forge built over lava lake,
 giant anvils and hammers, chains hanging from ceiling, molten
 metal everywhere
+```
+
+### Wisdom Ending
+**ID:** `wisdom_ending`
+**Category:** locations
+
+```
+16-bit pixel art, dark fantasy RPG ending scene, vibrant colors,
+adventurer silhouette walking away from dark dungeon entrance
+into bright daylight, sunrise or dawn lighting with golden rays,
+peaceful countryside path ahead with rolling hills and trees,
+dungeon entrance behind fading into shadow, sense of freedom and
+relief, birds flying in sky, hopeful atmosphere, journey home,
+detailed shading
+```
+
+### Treasure Castle Entrance
+**ID:** `treasure_castle`
+**Category:** locations
+
+```
+16-bit pixel art, dark fantasy RPG game scene, detailed shading,
+vibrant colors, grand ancient castle exterior at night, massive
+ornate wooden double doors with golden fixtures, stone steps
+leading up to entrance, torches flanking the doorway, mysterious
+golden glow emanating from within, imposing stone walls and towers,
+sense of finally reaching the destination, the King's castle
+where the treasure awaits
 ```
 
 ## Spells (9)

@@ -637,14 +637,16 @@ export class Battle {
         // Reset battle state
         this.character.usedSpells = [];
 
-        // Show enemy sprite and in sidebar
-        this.terminal.showSprite(getEnemySprite(this.enemyType), this.enemy.name);
+        // Show enemy sprite and in sidebar (skip sprite for Guardian - already showing battle sprite)
+        if (!this.isGuardianBattle) {
+            this.terminal.showSprite(getEnemySprite(this.enemyType), this.enemy.name);
+        }
         this.terminal.sidebar.showEnemy(this.enemy);
         this.terminal.sidebar.resetSpellStatus();
         this.updateSidebar();
 
-        // Boss warning
-        if (this.isBossBattle) {
+        // Boss warning (skip for Guardian - already shown)
+        if (this.isBossBattle && !this.isGuardianBattle) {
             this.terminal.bossWarning();
             this.terminal.print(`You are facing [red][bold]${this.enemy.name}[/bold][/red], a powerful enemy!`);
             this.terminal.print("Be prepared for special attacks!");

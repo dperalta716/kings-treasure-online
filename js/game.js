@@ -654,7 +654,7 @@ export class Game {
         await this.terminal.waitForEnter();
 
         this.terminal.print("\n[purple][italic]\"I was the first to stand where you stand now. The first to fight through impossible odds to reach this place.\"[/italic][/purple]");
-        this.terminal.print("\nThe featureless flames seem to regard you - somehow you feel its ancient gaze despite the absence of eyes.");
+        this.terminal.print("\nThe spectral flames seem to regard you - burning eyes within a face of swirling fire, devoid of any other features.");
         this.terminal.print("\n[purple][italic]\"And I found exactly what I sought.\"[/italic][/purple]");
         await this.terminal.waitForEnter();
 

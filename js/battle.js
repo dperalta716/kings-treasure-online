@@ -424,7 +424,7 @@ export class Battle {
             this.terminal.print("Time freezes around your enemy!");
 
             // Deal normal attack damage
-            const result = this.calculateDamage(this.character, this.enemy);
+            const result = calculateDamage(this.character, this.enemy, true);
             this.enemy.takeDamage(result.damage);
 
             if (result.critical) {

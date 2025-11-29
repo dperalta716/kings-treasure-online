@@ -276,7 +276,7 @@ export const ADVANCED_SHOP_SHIELDS = {
 };
 
 export const ADVANCED_SHOP_POTIONS = {
-    "Superior Health Potion": { price: 40, effect: "Restores 45 HP" },
+    "Superior Health Potion": { price: 45, effect: "Restores 45 HP" },
     "Master's Strength Elixir": { price: 45, effect: "+5 attack for one battle" },
     "Ultimate Defense Potion": { price: 45, effect: "+5 defense for one battle" }
 };

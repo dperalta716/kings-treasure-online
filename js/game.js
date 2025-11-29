@@ -639,36 +639,36 @@ export class Game {
     async guardianAntechamber() {
         this.terminal.showSprite('assets/sprites/enemies/treasures_guardian.webp', "The Treasure's Guardian");
 
-        // Pre-battle dialogue sequence - all narration in italics
-        this.terminal.print("\n[italic]You enter a vast stone chamber with vaulted ceilings. Torchlight flickers against ancient walls.[/italic]");
-        this.terminal.print("[italic]At the far end stand grand ornate wooden doors - and before them, [purple]something terrible[/purple].[/italic]");
+        // Pre-battle dialogue sequence - narration normal, spoken words purple+italic (telepathic)
+        this.terminal.print("\nYou enter a vast stone chamber with vaulted ceilings. Torchlight flickers against ancient walls.");
+        this.terminal.print("At the far end stand grand ornate wooden doors - and before them, [purple]something terrible[/purple].");
         await this.terminal.waitForEnter();
 
-        this.terminal.print("\n[italic]A figure in golden armor stands motionless. Where its face should be, there is nothing -[/italic]");
-        this.terminal.print("[italic]only [purple]swirling purple flames[/purple] that pour upward like a cursed crown.[/italic]");
-        this.terminal.print("[italic]The fire casts dancing shadows across the chamber walls.[/italic]");
+        this.terminal.print("\nA figure in golden armor stands motionless. Where its face should be, there is nothing -");
+        this.terminal.print("only [purple]swirling purple flames[/purple] that pour upward like a cursed crown.");
+        this.terminal.print("The fire casts dancing shadows across the chamber walls.");
         await this.terminal.waitForEnter();
 
-        this.terminal.print("\n[italic]It does not speak. But its voice resounds within your mind.[/italic]");
-        this.terminal.print("\n[purple]\"Another seeker. Another soul burning with ambition.\"[/purple]");
+        this.terminal.print("\nIt does not speak. But its voice resounds within your mind.");
+        this.terminal.print("\n[purple][italic]\"Another seeker. Another soul burning with ambition.\"[/italic][/purple]");
         await this.terminal.waitForEnter();
 
-        this.terminal.print("\n[purple]\"I was the first to stand where you stand now. The first to fight through impossible odds to reach this place.\"[/purple]");
-        this.terminal.print("\n[italic]The featureless flames seem to regard you - somehow you feel its ancient gaze despite the absence of eyes.[/italic]");
-        this.terminal.print("\n[purple]\"And I found exactly what I sought.\"[/purple]");
+        this.terminal.print("\n[purple][italic]\"I was the first to stand where you stand now. The first to fight through impossible odds to reach this place.\"[/italic][/purple]");
+        this.terminal.print("\nThe featureless flames seem to regard you - somehow you feel its ancient gaze despite the absence of eyes.");
+        this.terminal.print("\n[purple][italic]\"And I found exactly what I sought.\"[/italic][/purple]");
         await this.terminal.waitForEnter();
 
-        this.terminal.print("\n[purple]\"The treasure awaits beyond me. But tell me, seeker... when you dream of wealth, do you dream of what comes after? Of the weight of having everything you ever wanted?\"[/purple]");
+        this.terminal.print("\n[purple][italic]\"The treasure awaits beyond me. But tell me, seeker... when you dream of wealth, do you dream of what comes after? Of the weight of having everything you ever wanted?\"[/italic][/purple]");
         await this.terminal.waitForEnter();
 
-        this.terminal.print("\n[purple]\"I am bound to test you. That is my purpose now. But hear this warning...\"[/purple]");
-        this.terminal.print("\n[italic]The spectral flames flare brighter as it raises its golden blade - lightning crackles along the edge.[/italic]");
-        this.terminal.print("\n[purple]\"Some treasures are not meant to be found. Some victories are simply the beginning of a longer defeat.\"[/purple]");
+        this.terminal.print("\n[purple][italic]\"I am bound to test you. That is my purpose now. But hear this warning...\"[/italic][/purple]");
+        this.terminal.print("\nThe spectral flames flare brighter as it raises its golden blade - lightning crackles along the edge.");
+        this.terminal.print("\n[purple][italic]\"Some treasures are not meant to be found. Some victories are simply the beginning of a longer defeat.\"[/italic][/purple]");
         await this.terminal.waitForEnter();
 
-        this.terminal.print("\n[purple]\"But you will not turn back. None of you ever do. I know this, because I did not turn back either.\"[/purple]");
-        this.terminal.print("\n[italic]The Guardian assumes its battle stance. Purple fire erupts around its form.[/italic]");
-        this.terminal.print("\n[purple]\"Prove yourself worthy of your ambition... or be freed from it forever.\"[/purple]");
+        this.terminal.print("\n[purple][italic]\"But you will not turn back. None of you ever do. I know this, because I did not turn back either.\"[/italic][/purple]");
+        this.terminal.print("\nThe Guardian assumes its battle stance. Purple fire erupts around its form.");
+        this.terminal.print("\n[purple][italic]\"Prove yourself worthy of your ambition... or be freed from it forever.\"[/italic][/purple]");
         await this.terminal.waitForEnter("Press Enter to face The Treasure's Guardian...");
 
         // Flash to battle sprite before boss encounter
@@ -694,32 +694,32 @@ export class Game {
     async guardianPostBattle() {
         this.terminal.showSprite('assets/sprites/enemies/treasures_guardian_defeated.webp', "The Guardian - Freed");
 
-        this.terminal.print("\n[italic]The Treasure's Guardian staggers. The purple flames that engulfed him begin to flicker and fade.[/italic]");
+        this.terminal.print("\nThe Treasure's Guardian staggers. The purple flames that engulfed him begin to flicker and fade.");
         await this.terminal.waitForEnter();
 
-        this.terminal.print("\n[italic]As you watch, the spectral fire dissolves into wisps of smoke. The cursed golden armor cracks and falls away in pieces. Beneath it... a man. Just a man.[/italic]");
-        this.terminal.print("\n[italic]His hair no longer flame but simple gold, his eyes no longer burning but human - tired, grateful, finally at peace.[/italic]");
+        this.terminal.print("\nAs you watch, the spectral fire dissolves into wisps of smoke. The cursed golden armor cracks and falls away in pieces. Beneath it... a man. Just a man.");
+        this.terminal.print("His hair no longer flame but simple gold, his eyes no longer burning but human - tired, grateful, finally at peace.");
         await this.terminal.waitForEnter();
 
-        this.terminal.print("\n[italic]His voice echoes in your mind, clearer now, no longer distorted by the curse.[/italic]");
-        this.terminal.print("\n[cyan]\"You have... broken it. The hold it had on me. After all these centuries...\"[/cyan]");
+        this.terminal.print("\nHis voice echoes in your mind, clearer now, no longer distorted by the curse.");
+        this.terminal.print("\n[cyan][italic]\"You have... broken it. The hold it had on me. After all these centuries...\"[/italic][/cyan]");
         await this.terminal.waitForEnter();
 
-        this.terminal.print("\n[italic]He looks down at his hands - flesh again, not living gold.[/italic]");
-        this.terminal.print("\n[cyan]\"I am free.\"[/cyan]");
+        this.terminal.print("\nHe looks down at his hands - flesh again, no longer living gold.");
+        this.terminal.print("\n[cyan][italic]\"I am free.\"[/italic][/cyan]");
         await this.terminal.waitForEnter();
 
-        this.terminal.print("\n[italic]He looks up at you, and for the first time you see who he truly was - a treasure hunter, like you. Someone who sought glory and found only imprisonment.[/italic]");
-        this.terminal.print("\n[cyan]\"The treasure is yours by right of conquest. But I give you what no one gave me...\"[/cyan]");
-        this.terminal.print("\n[cyan]\"A choice.\"[/cyan]");
+        this.terminal.print("\nHe looks up at you, and for the first time you see who he truly was - a treasure hunter, like you. Someone who sought glory and found only imprisonment.");
+        this.terminal.print("\n[cyan][italic]\"The treasure is yours by right of conquest. But I give you what no one gave me...\"[/italic][/cyan]");
+        this.terminal.print("\n[cyan][italic]\"A choice.\"[/italic][/cyan]");
         await this.terminal.waitForEnter();
 
-        this.terminal.print("\n[italic]He gestures toward the grand doors behind him, then to the exit you came from.[/italic]");
-        this.terminal.print("\n[cyan]\"Enter and claim your prize. Or heed my warning and walk away while you still can. While you are still... yourself.\"[/cyan]");
+        this.terminal.print("\nHe gestures toward the grand doors behind him, then to the exit you came from.");
+        this.terminal.print("\n[cyan][italic]\"Enter and claim your prize. Or heed my warning and walk away while you still can. While you are still... yourself.\"[/italic][/cyan]");
         await this.terminal.waitForEnter();
 
-        this.terminal.print("\n[italic]His human eyes meet yours, pleading:[/italic]");
-        this.terminal.print("\n[cyan]\"I was the first to find the treasure. Look what it did to me. Please... choose wisely.\"[/cyan]");
+        this.terminal.print("\nHis human eyes meet yours, pleading.");
+        this.terminal.print("\n[cyan][italic]\"I was the first to find the treasure. Look what it did to me. Please... choose wisely.\"[/italic][/cyan]");
 
         // The choice
         this.terminal.print("\n[bold]What do you do?[/bold]");
@@ -730,8 +730,8 @@ export class Game {
             const choice = await this.terminal.prompt();
 
             if (choice === '1' || choice.toLowerCase().includes('enter') || choice.toLowerCase().includes('treasure')) {
-                this.terminal.print("\n[italic]You step past the freed Guardian toward the golden doors.[/italic]");
-                this.terminal.print("\n[cyan]\"So be it. May you fare better than I did... though I fear you will not.\"[/cyan]");
+                this.terminal.print("\nYou step past the freed Guardian toward the golden doors.");
+                this.terminal.print("\n[cyan][italic]\"So be it. May you fare better than I did... though I fear you will not.\"[/italic][/cyan]");
                 await this.terminal.waitForEnter();
                 return await this.treasureRoom();
             } else if (choice === '2' || choice.toLowerCase().includes('walk') || choice.toLowerCase().includes('heed') || choice.toLowerCase().includes('away')) {
@@ -748,22 +748,22 @@ export class Game {
     async wisdomEnding() {
         this.terminal.showSprite(getLocationSprite('wisdom_ending'), "A New Beginning");
 
-        this.terminal.print("\n[italic]You turn your back on the golden light. The man who was once the Guardian watches in silence as you walk away.[/italic]");
+        this.terminal.print("\nYou turn your back on the golden light. The man who was once the Guardian watches in silence as you walk away.");
         await this.terminal.waitForEnter();
 
-        this.terminal.print("\n[cyan]\"You are the first... the only one... to choose differently.\"[/cyan]");
-        this.terminal.print("\n[italic]His voice in your mind carries something new - not sorrow, but wonder.[/italic]");
+        this.terminal.print("\n[cyan][italic]\"You are the first... the only one... to choose differently.\"[/italic][/cyan]");
+        this.terminal.print("\nHis voice in your mind carries something new - not sorrow, but wonder.");
         await this.terminal.waitForEnter();
 
-        this.terminal.print("\n[cyan]\"I spent centuries guarding that door, waiting for someone strong enough to defeat me. But you... you are the first one wise enough to walk away.\"[/cyan]");
+        this.terminal.print("\n[cyan][italic]\"I spent centuries guarding that door, waiting for someone strong enough to defeat me. But you... you are the first one wise enough to walk away.\"[/italic][/cyan]");
         await this.terminal.waitForEnter();
 
-        this.terminal.print("\n[italic]You feel his presence fade from your mind, but his final words linger:[/italic]");
-        this.terminal.print("\n[cyan]\"Thank you. You have freed us both.\"[/cyan]");
+        this.terminal.print("\nYou feel his presence fade from your mind, but his final words linger.");
+        this.terminal.print("\n[cyan][italic]\"Thank you. You have freed us both.\"[/italic][/cyan]");
         await this.terminal.waitForEnter();
 
-        this.terminal.print("\n[italic]You leave the castle behind, treasure-less but whole. The sunrise greets you as you step outside - a new day, a new beginning.[/italic]");
-        this.terminal.print("\n[italic]And somehow, that feels like the greater victory.[/italic]");
+        this.terminal.print("\nYou leave the castle behind, treasure-less but whole. The sunrise greets you as you step outside - a new day, a new beginning.");
+        this.terminal.print("And somehow, that feels like the greater victory.");
         await this.terminal.waitForEnter();
 
         this.terminal.print("\n[victory]THE END[/victory]");

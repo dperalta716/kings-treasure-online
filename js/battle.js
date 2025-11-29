@@ -119,6 +119,7 @@ export class Battle {
         this.saveMenu = saveMenu;
         this.location = location;
         this.showedBattleSprite = false;
+        this.enemyFrozen = false;  // Time Freeze effect
     }
 
     /**
@@ -329,12 +330,28 @@ export class Battle {
             this.character.lastAction = 'spell';
             this.character.lastSpell = spellName;
             this.character.lastHealAmount = healAmount;
-        } else if (spell.type === 'extraTurn') {
+        } else if (spell.type === 'attackAndFreeze') {
             this.terminal.print(`\nYou cast [magenta]${spellName}[/magenta]!`);
-            this.terminal.print("Time freezes as you prepare your next action!");
+            this.terminal.print("Time freezes around your enemy!");
+
+            // Deal normal attack damage
+            const result = this.calculateDamage(this.character, this.enemy);
+            this.enemy.takeDamage(result.damage);
+
+            if (result.critical) {
+                this.terminal.print(`You strike for ${this.terminal.damageText(result.damage, true)}!`);
+            } else {
+                this.terminal.print(`You strike for ${this.terminal.damageText(result.damage)} damage!`);
+            }
+            this.terminal.print(`${this.enemy.name} HP: ${this.terminal.healthText(this.enemy.hp, this.enemy.maxHp)}`);
+
+            // Set flag to skip enemy's next turn
+            this.enemyFrozen = true;
+            this.terminal.print("[cyan]The enemy is frozen and will miss their next turn![/cyan]");
+
             this.character.lastAction = 'spell';
             this.character.lastSpell = spellName;
-            return await this.playerTurn();
+            this.character.lastDamage = result.damage;
         } else if (spell.type === 'damageAndHeal') {
             const damage = spell.damage;
             this.enemy.takeDamage(damage);
@@ -685,7 +702,14 @@ export class Battle {
                 return true;
             }
 
-            // Enemy turn
+            // Enemy turn (skip if frozen by Time Freeze)
+            if (this.enemyFrozen) {
+                this.terminal.print(`\n[cyan]${this.enemy.name} is frozen in time and cannot act![/cyan]`);
+                this.enemyFrozen = false;  // Reset for next turn
+                await this.terminal.delay(800);
+                continue;
+            }
+
             const enemyResult = await this.enemyTurn();
             this.updateSidebar();
             await this.terminal.delay(800);

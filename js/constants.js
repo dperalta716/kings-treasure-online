@@ -88,8 +88,8 @@ export const WEAPON_DAMAGE = {
     "Trident of the Depths": 13,
 
     // Shop weapons
-    "Obsidian Blade": 9,
-    "Dragonfire Bow": 10,
+    "Obsidian Blade": 12,
+    "Dragonfire Bow": 13,
     "Fine Bow": 8,
 
     // Special item weapons
@@ -267,8 +267,8 @@ export const SHOP_POTIONS = {
 
 // Advanced shop items
 export const ADVANCED_SHOP_WEAPONS = {
-    "Obsidian Blade": { price: 75, damage: 9 },
-    "Dragonfire Bow": { price: 85, damage: 10 }
+    "Obsidian Blade": { price: 100, damage: 12 },
+    "Dragonfire Bow": { price: 115, damage: 13 }
 };
 
 export const ADVANCED_SHOP_SHIELDS = {

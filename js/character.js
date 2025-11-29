@@ -153,20 +153,14 @@ export class Character {
     }
 
     /**
-     * Use a superior health potion (full heal + 10 temp max HP)
+     * Use a superior health potion (heals 45 HP)
      */
     useSuperiorPotion() {
         if (this.superiorPotions <= 0) return false;
 
         this.superiorPotions--;
-
-        // Add 10 temp max HP
-        this.tempHpBoost += 10;
-        this.maxHp = this.baseMaxHp + this.tempHpBoost;
-
-        // Full heal
-        const healAmount = this.maxHp - this.hp;
-        this.hp = this.maxHp;
+        const healAmount = Math.min(45, this.maxHp - this.hp);
+        this.hp = Math.min(this.maxHp, this.hp + 45);
         return healAmount;
     }
 

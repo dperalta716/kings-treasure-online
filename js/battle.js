@@ -285,8 +285,7 @@ export class Battle {
     useSuperiorPotion() {
         const healAmount = this.character.useSuperiorPotion();
         this.terminal.print(`\nYou drink a Superior Health Potion and recover [green]${healAmount}[/green] HP!`);
-        this.terminal.print("Your maximum HP is temporarily increased by 10 for this battle!");
-        this.terminal.print(`You are now at full health: ${this.character.hp}/${this.character.maxHp} HP`);
+        this.terminal.print(`HP: ${this.character.hp}/${this.character.maxHp}`);
         return 'continue';
     }
 
@@ -305,8 +304,8 @@ export class Battle {
             optNum++;
         }
         if (this.character.superiorPotions > 0) {
-            potionOptions.push({ key: optNum, type: 'superior', name: 'Superior Health Potion', count: this.character.superiorPotions, desc: 'Full heal + 10 temp HP' });
-            this.terminal.print(`  ${optNum}. Superior Health Potion (${this.character.superiorPotions}) - Full heal + 10 temp HP`);
+            potionOptions.push({ key: optNum, type: 'superior', name: 'Superior Health Potion', count: this.character.superiorPotions, desc: 'Restore 45 HP' });
+            this.terminal.print(`  ${optNum}. Superior Health Potion (${this.character.superiorPotions}) - Restore 45 HP`);
             optNum++;
         }
         if (this.character.strengthElixirs > 0) {

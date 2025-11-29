@@ -415,7 +415,7 @@ export class Shop {
         if (name === "Superior Health Potion") {
             this.character.superiorPotions++;
             this.terminal.print("You bought a Superior Health Potion!");
-            this.terminal.print("Use it in battle to restore HP fully AND boost max HP by 10.");
+            this.terminal.print("Use it in battle to restore 45 HP.");
             this.terminal.print(`You now have ${this.character.superiorPotions} Superior Health Potions.`);
         } else if (name === "Master's Strength Elixir") {
             this.character.masterStrengthElixirs++;

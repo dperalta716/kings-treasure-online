@@ -305,8 +305,8 @@ export const SPELLS = {
     "Mana Bolt": {
         unlockLevel: null,  // Mage class only, not level-unlocked
         type: "attack",
-        damageBonus: 5,
-        description: "A focused burst of arcane energy (Attack + 5 damage)"
+        damageBonus: 4,
+        description: "A focused burst of arcane energy (Attack + 4 damage)"
     },
     "Arcane Blast": {
         unlockLevel: 2,

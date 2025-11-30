@@ -3,7 +3,7 @@
  */
 import { Enemy } from './character.js';
 import {
-    ENEMY_DATA, WEAPON_DAMAGE, WEAPON_DROPS, SPECIAL_ITEM_DROPS, SPELLS,
+    ENEMY_DATA, WEAPON_DAMAGE, WEAPON_DROPS, SPECIAL_ITEM_DROPS, SPELLS, CHARGE_MULTIPLIER,
     getEnemySprite, getDefeatedEnemySprite, getEnemyBattleSprite, getWeaponSprite, getItemSprite, getShieldSprite, getLocationSprite
 } from './constants.js';
 
@@ -152,8 +152,11 @@ export class Battle {
     async playerTurn() {
         this.terminal.print("\n[bold]Your turn![/bold]");
 
-        // Build menu options
-        const options = ['1. Attack', '2. Defend (reduce damage by 50%)'];
+        // Build menu options with contextual defend text
+        const defendText = this.character.chargeUsedThisBattle
+            ? '2. Defend (reduce damage by 50%)'
+            : '2. Defend (block 50% + charge next attack 2x!)';
+        const options = ['1. Attack', defendText];
         let optionNum = 3;
 
         // Check if player has ANY potions
@@ -213,6 +216,14 @@ export class Battle {
     async performAttack() {
         const result = calculateDamage(this.character, this.enemy, true);
 
+        // Apply charge multiplier if charged
+        let isPowerAttack = false;
+        if (this.character.charged) {
+            result.damage = Math.floor(result.damage * CHARGE_MULTIPLIER);
+            this.character.charged = false;
+            isPowerAttack = true;
+        }
+
         let message = `You attack with your ${this.character.weapon}`;
         if (this.character.hasLeviathanGauntlets) {
             message += ' (enhanced by Leviathan Gauntlets +4)';
@@ -225,6 +236,12 @@ export class Battle {
             message += result.pendulumHigh ? ' (Pendulum: 120% power)' : ' (Pendulum: 80% power)';
         }
 
+        // Power attack message (before crit to stack the excitement)
+        if (isPowerAttack) {
+            this.terminal.print("\n[yellow]*** POWER ATTACK! ***[/yellow]");
+            this.terminal.print("You unleash your charged strike with devastating force!");
+        }
+
         if (result.isCritical) {
             this.terminal.print("\n[critical]CRITICAL HIT![/critical] Your attack pierces through their defenses!");
         }
@@ -235,7 +252,7 @@ export class Battle {
         }
 
         this.enemy.takeDamage(result.damage);
-        this.terminal.print(`${message} and deal ${this.terminal.damageText(result.damage, result.isCritical)} damage!`);
+        this.terminal.print(`${message} and deal ${this.terminal.damageText(result.damage, result.isCritical || isPowerAttack)} damage!`);
 
         // Echo Blade second attack
         if (result.echoTriggered && this.enemy.hp > 0) {
@@ -265,7 +282,18 @@ export class Battle {
      */
     performDefend() {
         this.character.defending = true;
-        this.terminal.print("\nYou take a defensive stance, preparing to block the next attack!");
+
+        // Check if charge is available (once per battle)
+        if (!this.character.chargeUsedThisBattle) {
+            this.character.charged = true;
+            this.character.chargeUsedThisBattle = true;
+            this.terminal.print("\n[yellow]*** CHARGING POWER! ***[/yellow]");
+            this.terminal.print("You brace yourself, gathering power for a devastating strike!");
+            this.terminal.print("[cyan]Your next attack will deal DOUBLE damage![/cyan]");
+        } else {
+            this.terminal.print("\nYou take a defensive stance, preparing to block the next attack!");
+            this.terminal.print("[dim](Power Charge already used this battle)[/dim]");
+        }
         return 'continue';
     }
 
@@ -761,6 +789,8 @@ export class Battle {
     async run() {
         // Reset battle state
         this.character.usedSpells = [];
+        this.character.charged = false;
+        this.character.chargeUsedThisBattle = false;
 
         // Show enemy sprite and in sidebar (skip sprite for Guardian - already showing battle sprite)
         if (!this.isGuardianBattle) {

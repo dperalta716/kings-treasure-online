@@ -244,6 +244,7 @@ export class Sidebar {
     showBuffs(character) {
         const buffs = [];
 
+        if (character.charged) buffs.push('CHARGED (2x next attack!)');
         if (character.defending) buffs.push('Defending (50% dmg reduction)');
         if (character.tempAttackBoost > 0) buffs.push(`+${character.tempAttackBoost} Attack`);
         if (character.tempDefenseBoost > 0) buffs.push(`+${character.tempDefenseBoost} Defense`);

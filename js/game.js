@@ -53,7 +53,7 @@ export class Game {
         this.terminal.showSprite(getCharacterSprite(`${gender}_warrior`), 'Warrior');
 
         this.terminal.print("\n[bold]Choose Your Path[/bold]");
-        this.terminal.print("[dim](Use arrows or type 1-3 to preview, Enter to confirm)[/dim]\n");
+        this.terminal.print("[dim](Press 1-3 or arrows to preview, Enter to confirm)[/dim]\n");
         this.terminal.print("1. [red]WARRIOR[/red] - A battle-hardened soldier");
         this.terminal.print("   HP: 30 | ATK: 5 | DEF: 2");
         this.terminal.print("\n2. [magenta]MAGE[/magenta] - A wielder of arcane power");
@@ -65,6 +65,9 @@ export class Game {
         const classNames = { 'warrior': 'Warrior', 'mage': 'Mage', 'rogue': 'Rogue' };
         const classList = ['warrior', 'mage', 'rogue'];
         let classIndex = 0;
+
+        // Enable instant number keys for class preview
+        this.terminal.instantNumberKeys = true;
 
         while (true) {
             const input = await this.terminal.prompt();
@@ -86,6 +89,9 @@ export class Game {
                 break;
             }
         }
+
+        // Disable instant number keys after class selection
+        this.terminal.instantNumberKeys = false;
 
         // Create and initialize character
         this.character = new Character("Hero");

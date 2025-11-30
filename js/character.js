@@ -39,6 +39,10 @@ export class Character {
         this.tempDefenseBoost = 0;
         this.defending = false;
 
+        // Charge-up defense mechanic
+        this.charged = false;              // Next attack deals 2x damage
+        this.chargeUsedThisBattle = false; // Can only charge once per battle
+
         // Special items (flags)
         this.hasLeviathanGauntlets = false;
         this.hasSharkAmulet = false;
@@ -243,6 +247,8 @@ export class Character {
         this.tempAttackBoost = 0;
         this.tempDefenseBoost = 0;
         this.defending = false;
+        this.charged = false;
+        this.chargeUsedThisBattle = false;
         this.usedSpells = [];
         this.sharkAmuletUsed = false;
 

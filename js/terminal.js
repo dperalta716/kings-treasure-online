@@ -13,6 +13,7 @@ export class Terminal {
         this.spriteGrid = document.getElementById('sprite-grid');
         this.inputResolve = null;
         this.inputActive = false;
+        this.instantNumberKeys = false; // When true, 1-9 keys resolve immediately without Enter
 
         // Initialize sidebar
         this.sidebar = new Sidebar();
@@ -111,6 +112,14 @@ export class Terminal {
                 this.inputResolve(direction);
                 this.inputResolve = null;
                 // Re-activate input for next prompt
+                this.inputActive = false;
+            }
+        } else if (this.instantNumberKeys && e.key >= '1' && e.key <= '9') {
+            // Instant number key mode - resolve immediately without Enter
+            e.preventDefault();
+            if (this.inputResolve) {
+                this.inputResolve(e.key);
+                this.inputResolve = null;
                 this.inputActive = false;
             }
         }

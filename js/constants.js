@@ -360,7 +360,7 @@ export const LEVEL_UP_BONUSES = {
 // COMBAT CONSTANTS
 // =============================================================================
 
-export const CHARGE_MULTIPLIER = 2.0;  // Power attack damage multiplier
+export const CHARGE_MULTIPLIER = 1.5;  // Power attack damage multiplier
 
 // =============================================================================
 // SPRITE PATHS

@@ -151,15 +151,16 @@ export class Game {
             this.character.shield = "Knight's Shield";
             this.character.potions = 3;
             this.character.spells = ['Arcane Blast', 'Energy Surge', 'Astral Strike'];
-            this.terminal.print("\n[yellow]*** DEBUG MODE: Skipping to Grand Finale ***[/yellow]");
+            this.terminal.print("\n[yellow]*** DEBUG MODE: Skipping to Treasure Castle ***[/yellow]");
             this.updateSidebar();
             await this.terminal.delay(500);
-            return await this.grandFinale();
+            return await this.treasureCastle();
         }
 
         // Character creation flow
         await this.characterCreation();
         this.updateSidebar();
+        await this.storyIntro();
         return await this.thiefsCrossroads();
     }
 
@@ -239,14 +240,37 @@ export class Game {
     }
 
     /**
-     * Treasure room - victory ending
+     * Treasure room - curse reveal ending
      */
     async treasureRoom() {
+        // Phase 1: False Victory
         this.terminal.showSprite(getLocationSprite('treasure'), "King's Treasure");
         this.terminal.print("\n[victory]Congratulations! You found the King's Treasure![/victory]");
         this.terminal.print("The chamber glitters with gold coins, gems, and ancient artifacts.");
 
-        this.terminal.print("\n[bold]Your final adventure stats:[/bold]");
+        await this.terminal.waitForEnter();
+
+        // Phase 2: The Transformation (dramatic slow fade)
+        await this.terminal.slowFadeSprite(
+            getLocationSprite('treasure_corrupted'),
+            "The Cursed Treasure",
+            2500
+        );
+
+        // Phase 3: Simple Curse Reveal (placeholder)
+        this.terminal.print("\n[red][bold]You've been cursed![/bold][/red]");
+        this.terminal.print("\n[italic]What happens next? How will you remove the curse?[/italic]");
+        this.terminal.print("[italic]Find out in the sequel...[/italic]");
+
+        this.terminal.print("\n[bold]═══════════════════════════════════════════════════════════[/bold]");
+        this.terminal.print("\n[victory][bold]THE KING'S CURSE[/bold][/victory]");
+        this.terminal.print("[italic]Coming Soon[/italic]");
+        this.terminal.print("\n[bold]═══════════════════════════════════════════════════════════[/bold]");
+
+        // Phase 4: Stats + Play Again
+        await this.terminal.waitForEnter();
+
+        this.terminal.print("\n[bold]Your adventure stats:[/bold]");
         this.terminal.print(`Level: ${this.character.level}`);
         this.terminal.print(`HP: ${this.character.hp}/${this.character.maxHp}`);
         this.terminal.print(`Gold: ${this.character.gold}`);
@@ -280,27 +304,47 @@ export class Game {
     // ==========================================================================
 
     /**
+     * Story introduction - the legend of the treasure
+     */
+    async storyIntro() {
+        this.terminal.showSprite(getLocationSprite('treasure_map'), "The Legend");
+        this.terminal.print("\n=== THE LEGEND ===");
+        this.terminal.print("\nFor generations, whispers have spread of the King's Treasure - a hoard of");
+        this.terminal.print("unimaginable wealth hidden in a castle at the edge of the known world.");
+        this.terminal.print("\n[italic]Many have sought it. None have returned.[/italic]");
+        await this.terminal.waitForEnter();
+
+        this.terminal.print("\nBut recently, a map has come into your possession...");
+        this.terminal.print("\nThe path is fraught with danger: treacherous crossroads, ancient ruins,");
+        this.terminal.print("and creatures that defy imagination.");
+        this.terminal.print("\nYou gather your courage, check your gear, and set out on the journey of a lifetime...");
+        await this.terminal.waitForEnter("Press Enter to begin your adventure...");
+    }
+
+    /**
      * Starting location - Thief's Crossroads
      */
     async thiefsCrossroads() {
         this.terminal.showSprite(getLocationSprite('thiefs_crossroads'), "Thief's Crossroads");
-        this.terminal.print("\nYou've reached [cyan]The Thief's Crossroads[/cyan]. Where do you want to go?");
-        this.terminal.print("Type 'left' or 'right'");
+        this.terminal.print("\nYou've reached [cyan]The Thief's Crossroads[/cyan]. Two paths diverge before you:");
+        this.terminal.print("\n1. A path leading down toward a [cyan]mist-shrouded lake[/cyan]");
+        this.terminal.print("2. A path winding up into the [dim]mountains[/dim]");
+        this.terminal.print("\nWhich path do you take? (1/2)");
 
         while (true) {
-            const direction = await this.terminal.prompt();
+            const choice = await this.terminal.prompt();
 
             // Secret shortcut
-            if (direction.toLowerCase() === 'p') {
+            if (choice.toLowerCase() === 'p') {
                 return await this.grandFinale();
             }
 
-            if (direction.toLowerCase() === 'left' || direction.toLowerCase() === 'l') {
+            if (choice === '1') {
                 return await this.lakePath();
-            } else if (direction.toLowerCase() === 'right' || direction.toLowerCase() === 'r') {
+            } else if (choice === '2') {
                 return await this.mountainPath();
             } else {
-                this.terminal.print("Invalid entry. Please type 'left' or 'right'.");
+                this.terminal.print("Invalid entry. Please choose a path (1/2).");
             }
         }
     }
@@ -310,20 +354,22 @@ export class Game {
      */
     async lakePath() {
         this.terminal.showSprite(getLocationSprite('lake'), 'The Lake');
-        this.terminal.print("\nYou arrive at a vast lake. There's a boat tied to a dock.");
-        this.terminal.print("Type 'swim' (s) to swim across or 'take' (t) to take the boat.");
+        this.terminal.print("\nYou arrive at a vast lake. An old rowboat with patched holes sits at the dock. Do you want to:");
+        this.terminal.print("\n1. [cyan]Swim[/cyan] across the lake");
+        this.terminal.print("2. [cyan]Take the boat[/cyan] across");
+        this.terminal.print("\nWhat do you do? (1/2)");
 
         while (true) {
             const choice = await this.terminal.prompt();
 
-            if (choice.toLowerCase() === 'swim' || choice.toLowerCase() === 's') {
+            if (choice === '1') {
                 this.terminal.print("\nAs you swim across the lake, a ferocious shark appears!");
                 if (!await this.runBattle('shark', 'thiefs_crossroads')) {
                     return await this.gameOver("You were defeated by the Ferocious Shark!");
                 }
                 this.terminal.print("\nAfter defeating the shark, you reach the other side of the lake.");
                 break;
-            } else if (choice.toLowerCase() === 'take' || choice.toLowerCase() === 't') {
+            } else if (choice === '2') {
                 this.terminal.print("\nAs you row across the lake, a terrifying lake monster emerges from the depths!");
                 if (!await this.runBattle('lake_monster', 'thiefs_crossroads')) {
                     return await this.gameOver("You were dragged underwater by the Lake Monster!");
@@ -331,12 +377,12 @@ export class Game {
                 this.terminal.print("\nAfter defeating the lake monster, the boat takes you safely across.");
                 break;
             } else {
-                this.terminal.print("Invalid entry. Please type 'swim' or 'take'.");
+                this.terminal.print("Invalid entry. Please choose (1/2).");
             }
         }
 
-        this.terminal.print("In the distance, you can see a large castle.");
-        return await this.castle();
+        this.terminal.print("In the distance, you can see a large stronghold.");
+        return await this.stronghold();
     }
 
     /**
@@ -357,46 +403,46 @@ export class Game {
             }
         }
 
-        this.terminal.print("\nAfter your victory, you continue along the path and see a castle in the distance.");
-        return await this.castle();
+        this.terminal.print("\nAfter your victory, you continue along the path and see a stronghold in the distance.");
+        return await this.stronghold();
     }
 
     /**
-     * Castle
+     * Stronghold
      */
-    async castle() {
-        this.terminal.showSprite(getLocationSprite('castle'), 'The Castle');
-        this.terminal.print("\nYou approach the castle. There are two doors:");
-        this.terminal.print("A [red]red door[/red] and a [blue]blue door[/blue].");
-        this.terminal.print("Which door do you choose? (red/blue)");
+    async stronghold() {
+        this.terminal.showSprite(getLocationSprite('castle'), 'The Stronghold');
+        this.terminal.print("\nYou approach the stronghold. Two routes lead to the entrance:");
+        this.terminal.print("\n1. A [red]forest trail[/red] winding through the woods");
+        this.terminal.print("2. A [blue]rocky ridge[/blue] along the cliffs");
+        this.terminal.print("\nWhich path do you take? (1/2)");
 
         while (true) {
             const choice = await this.terminal.prompt();
 
-            if (choice.toLowerCase() === 'red' || choice.toLowerCase() === 'r') {
-                this.terminal.print("\nBehind the red door, you find a savage bear rider guarding the passage!");
+            if (choice === '1') {
+                this.terminal.print("\nYou take the forest trail. Suddenly, a savage bear rider charges from the trees!");
                 if (!await this.runBattle('bear_rider', 'hidden_passages')) {
                     return await this.gameOver("You were defeated by the bear rider!");
                 }
                 break;
-            } else if (choice.toLowerCase() === 'blue' || choice.toLowerCase() === 'b') {
-                this.terminal.print("\nAs you open the blue door, a fearsome dragon knight challenges you!");
+            } else if (choice === '2') {
+                this.terminal.print("\nYou climb the rocky ridge. A fearsome dragon knight blocks your way!");
                 if (!await this.runBattle('dragon_knight', 'hidden_passages')) {
                     return await this.gameOver("You were defeated by the dragon knight!");
                 }
                 break;
             } else {
-                this.terminal.print("Invalid entry. Please type 'red' or 'blue'.");
+                this.terminal.print("Invalid entry. Please choose a path (1/2).");
             }
         }
 
-        // Shop after defeating castle guardian
+        // Shop after defeating stronghold guardian
         this.terminal.print("\nAfter your victory, you notice a merchant's stall nearby.");
         this.terminal.print("Perhaps you should see what they're selling before continuing.");
         await this.visitShop();
 
-        this.terminal.print("\nRested and restocked, you discover a hidden passage.");
-        this.terminal.print("The passage splits into two dark corridors...");
+        this.terminal.print("\nRested and restocked, you enter the stronghold and discover two hidden passages beneath the stone floor.");
         return await this.hiddenPassages();
     }
 
@@ -406,16 +452,17 @@ export class Game {
     async hiddenPassages() {
         this.terminal.showSprite(getLocationSprite('hidden_passages'), 'Hidden Passages');
         this.terminal.print("\n== THE HIDDEN PASSAGES ==");
-        this.terminal.print("You've discovered secret paths within the castle!");
-        this.terminal.print("1. Take the left path (Ancient Caverns)");
-        this.terminal.print("2. Take the right path (Forgotten Temple)");
+        this.terminal.print("You've discovered secret paths within the stronghold!");
+        this.terminal.print("\n1. A passage where [cyan]strange crystals[/cyan] glint in the darkness");
+        this.terminal.print("2. A corridor lined with [yellow]ancient statues[/yellow] and faded symbols");
+        this.terminal.print("\nWhich path do you take? (1/2)");
 
         while (true) {
             const choice = await this.terminal.prompt();
 
             if (choice === '1') {
                 this.terminal.showSprite(getLocationSprite('ancient_caverns'), 'Ancient Caverns');
-                this.terminal.print("\nYou enter the Ancient Caverns, where the walls glisten with strange crystals.");
+                this.terminal.print("\nYou enter the Ancient Caverns, where torchlight flickers against damp stone walls.");
                 await this.terminal.waitForEnter();
 
                 if (Math.random() < 0.5) {
@@ -452,7 +499,6 @@ export class Game {
             }
         }
 
-        this.terminal.print("\nAfter your challenging battle, you discover a massive gate that leads to three ornate doorways.");
         return await this.convergencePaths();
     }
 
@@ -461,13 +507,13 @@ export class Game {
      */
     async convergencePaths() {
         this.terminal.showSprite(getLocationSprite('three_doors'), 'Three Doors');
-        this.terminal.print("\nEach doorway seems to lead to a different realm:");
-        this.terminal.print("\n1. A doorway encrusted with [cyan]glowing crystals[/cyan]");
-        this.terminal.print("2. A doorway radiating [red]intense heat[/red]");
-        this.terminal.print("3. A doorway with [blue]water flowing[/blue] around its frame");
+        this.terminal.print("\nYou stand before a vast landscape with three distinct regions:");
+        this.terminal.print("\n1. A crystalline land glowing with [cyan]purple and blue light[/cyan]");
+        this.terminal.print("2. A volcanic mountain radiating [red]intense heat[/red]");
+        this.terminal.print("3. An ocean coastline with [blue]sunken ruins[/blue] rising from the waves");
 
         while (true) {
-            this.terminal.print("\nWhich doorway will you choose? (1/2/3)");
+            this.terminal.print("\nWhich path will you take? (1/2/3)");
             const choice = await this.terminal.prompt();
 
             let result;
@@ -478,7 +524,7 @@ export class Game {
             } else if (choice === '3') {
                 result = await this.sunkenRuins();
             } else {
-                this.terminal.print("Invalid entry. Please choose a doorway (1-3).");
+                this.terminal.print("Invalid entry. Please choose a path (1-3).");
                 continue;
             }
 
@@ -495,7 +541,7 @@ export class Game {
     async crystalPalace() {
         this.terminal.showSprite(getLocationSprite('crystal_palace'), 'Crystal Palace');
         this.terminal.print("\n=== THE CRYSTAL PALACE ===");
-        this.terminal.print("You step through the doorway into a magnificent palace made entirely of glowing crystals.");
+        this.terminal.print("You journey toward the crystalline land and discover a magnificent palace made entirely of glowing crystals.");
         this.terminal.print("The walls shimmer with magical energy, and strange crystalline creatures roam the halls.");
         await this.terminal.waitForEnter();
 
@@ -521,7 +567,7 @@ export class Game {
     async volcanicForge() {
         this.terminal.showSprite(getLocationSprite('volcanic_forge'), 'Volcanic Forge');
         this.terminal.print("\n=== THE VOLCANIC FORGE ===");
-        this.terminal.print("Heat blasts you as you step through the doorway into a scorching forge.");
+        this.terminal.print("Heat blasts you as you approach the volcanic mountain and find a scorching forge built into its base.");
         this.terminal.print("Rivers of lava flow through channels, and the air is thick with smoke and ash.");
         await this.terminal.waitForEnter();
 
@@ -547,7 +593,7 @@ export class Game {
     async sunkenRuins() {
         this.terminal.showSprite(getLocationSprite('sunken_ruins'), 'Sunken Ruins');
         this.terminal.print("\n=== THE SUNKEN RUINS ===");
-        this.terminal.print("You step through and find yourself in ancient ruins, protected by a magical air bubble underwater.");
+        this.terminal.print("You approach the ruins. As you step onto the beach, a magical air bubble encases you and draws you underwater.");
         this.terminal.print("Strange aquatic creatures have made this place their home.");
         await this.terminal.waitForEnter();
 
@@ -726,12 +772,16 @@ export class Game {
      * Guardian Antechamber - meeting the Guardian
      */
     async guardianAntechamber() {
-        this.terminal.showSprite('assets/sprites/enemies/treasures_guardian.webp', "The Treasure's Guardian");
+        // Show antechamber doors first
+        this.terminal.showSprite(getLocationSprite('guardian_antechamber'), "The Antechamber");
 
         // Pre-battle dialogue sequence - narration normal, spoken words purple+italic (telepathic)
         this.terminal.print("\nYou enter a vast stone chamber with vaulted ceilings. Torchlight flickers against ancient walls.");
         this.terminal.print("At the far end stand grand ornate wooden doors - and before them, [purple]something terrible[/purple].");
         await this.terminal.waitForEnter();
+
+        // Fade to reveal the Guardian
+        this.terminal.showSprite('assets/sprites/enemies/treasures_guardian.webp', "The Treasure's Guardian");
 
         this.terminal.print("\nA figure in golden armor stands motionless. Where its face should be, there is nothing -");
         this.terminal.print("only [purple]swirling purple flames[/purple] that pour upward like a cursed crown.");
@@ -750,14 +800,9 @@ export class Game {
         this.terminal.print("\n[purple][italic]\"The treasure awaits beyond me. But tell me, seeker... when you dream of wealth, do you dream of what comes after? Of the weight of having everything you ever wanted?\"[/italic][/purple]");
         await this.terminal.waitForEnter();
 
-        this.terminal.print("\n[purple][italic]\"I am bound to test you. That is my purpose now. But hear this warning...\"[/italic][/purple]");
-        this.terminal.print("\nThe spectral flames flare brighter as it raises its golden blade - lightning crackles along the edge.");
-        this.terminal.print("\n[purple][italic]\"Some treasures are not meant to be found. Some victories are simply the beginning of a longer defeat.\"[/italic][/purple]");
-        await this.terminal.waitForEnter();
-
-        this.terminal.print("\n[purple][italic]\"But you will not turn back. None of you ever do. I know this, because I did not turn back either.\"[/italic][/purple]");
-        this.terminal.print("\nThe Guardian assumes its battle stance. Purple fire erupts around its form.");
-        this.terminal.print("\n[purple][italic]\"Prove yourself worthy of your ambition... or be freed from it forever.\"[/italic][/purple]");
+        this.terminal.print("\n[purple][italic]\"Some treasures are not meant to be found. But you will not turn back - none ever do.\"[/italic][/purple]");
+        this.terminal.print("\nThe Guardian raises its golden blade. Lightning crackles along the edge as purple fire erupts around its form.");
+        this.terminal.print("\n[purple][italic]\"I am bound to test you. Prove yourself worthy of your ambition... or be freed from it forever.\"[/italic][/purple]");
         await this.terminal.waitForEnter("Press Enter to face The Treasure's Guardian...");
 
         // Flash to battle sprite before boss encounter
@@ -790,11 +835,8 @@ export class Game {
         this.terminal.print("His hair no longer flame but simple gold, his eyes no longer burning but human - tired, grateful, finally at peace.");
         await this.terminal.waitForEnter();
 
-        this.terminal.print("\nHe speaks, his voice hoarse from centuries of silence.");
-        this.terminal.print("\n[cyan]\"You have... broken it. The hold it had on me. After all these centuries...\"[/cyan]");
-        await this.terminal.waitForEnter();
-
-        this.terminal.print("\nHe looks down at his hands - flesh again, no longer living gold.");
+        this.terminal.print("\n[cyan]\"After all these centuries...\"[/cyan]");
+        this.terminal.print("\nHe looks down at his hands - flesh again, no longer spectral flame.");
         this.terminal.print("\n[cyan]\"I am free.\"[/cyan]");
         await this.terminal.waitForEnter();
 

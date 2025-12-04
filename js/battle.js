@@ -152,13 +152,6 @@ export class Battle {
     async playerTurn() {
         this.terminal.print("\n[bold]Your turn![/bold]");
 
-        // Build menu options with contextual defend text
-        const defendText = this.character.chargeUsedThisBattle
-            ? '2. Defend (reduce damage by 50%)'
-            : '2. Defend (block 50% + charge next attack 2x!)';
-        const options = ['1. Attack', defendText];
-        let optionNum = 3;
-
         // Check if player has ANY potions
         const hasPotions = this.character.potions > 0 ||
                           this.character.superiorPotions > 0 ||
@@ -167,19 +160,45 @@ export class Battle {
                           this.character.masterStrengthElixirs > 0 ||
                           this.character.ultimateDefensePotions > 0;
 
-        if (hasPotions) {
-            options.push(`${optionNum}. Use Potion`);
-            optionNum++;
-        }
-
         const availableSpells = this.character.getAvailableSpells();
-        if (availableSpells.length > 0) {
-            options.push(`${optionNum}. Cast Spell`);
+        const hasSpells = availableSpells.length > 0;
+
+        // Determine if player is in charged mode (must attack)
+        const isCharged = this.character.charged;
+        const chargeUsed = this.character.chargeUsedThisBattle;
+
+        // Build menu options with appropriate styling
+        this.terminal.print("\nChoose an action:");
+
+        // Option 1: Attack (always available)
+        this.terminal.print("  1. Attack");
+
+        // Option 2: Defend - strikethrough if charge used OR if currently charged
+        if (chargeUsed) {
+            this.terminal.print("  [strike]2. Defend (used)[/strike]");
+        } else {
+            this.terminal.print("  2. Defend (block 50% + charge next attack 1.5x!)");
         }
 
-        this.terminal.print("\nChoose an action:");
-        for (const opt of options) {
-            this.terminal.print(`  ${opt}`);
+        // Option 3: Use Potion - strikethrough if charged, otherwise normal
+        let potionOptionNum = 3;
+        if (hasPotions) {
+            if (isCharged) {
+                this.terminal.print("  [strike]3. Use Potion[/strike]");
+            } else {
+                this.terminal.print("  3. Use Potion");
+            }
+            potionOptionNum = 3;
+        }
+
+        // Option 4 (or 3 if no potions): Cast Spell - strikethrough if charged
+        const spellOptionNum = hasPotions ? 4 : 3;
+        if (hasSpells) {
+            if (isCharged) {
+                this.terminal.print(`  [strike]${spellOptionNum}. Cast Spell[/strike]`);
+            } else {
+                this.terminal.print(`  ${spellOptionNum}. Cast Spell`);
+            }
         }
 
         const choice = await this.terminal.prompt();
@@ -192,18 +211,30 @@ export class Battle {
             return 'win';
         }
 
-        // Process choice
+        // Process choice with validation for charged state
         if (choice === '1') {
             return await this.performAttack();
         } else if (choice === '2') {
+            // Defend is disabled if charge already used this battle
+            if (chargeUsed) {
+                this.terminal.print("\n[dim]You cannot defend again this battle![/dim]");
+                return await this.playerTurn();
+            }
             return this.performDefend();
         } else if (choice === '3' && hasPotions) {
-            return await this.usePotionMenu();
-        } else {
-            const spellOptionNum = options.findIndex(o => o.includes('Cast Spell'));
-            if (spellOptionNum !== -1 && choice === String(spellOptionNum + 1)) {
-                return await this.castSpell();
+            // Potions disabled while charged
+            if (isCharged) {
+                this.terminal.print("\n[dim]You must use your charged attack![/dim]");
+                return await this.playerTurn();
             }
+            return await this.usePotionMenu();
+        } else if (choice === String(spellOptionNum) && hasSpells) {
+            // Spells disabled while charged
+            if (isCharged) {
+                this.terminal.print("\n[dim]You must use your charged attack![/dim]");
+                return await this.playerTurn();
+            }
+            return await this.castSpell();
         }
 
         this.terminal.print("Invalid choice. Try again.");
@@ -283,17 +314,12 @@ export class Battle {
     performDefend() {
         this.character.defending = true;
 
-        // Check if charge is available (once per battle)
-        if (!this.character.chargeUsedThisBattle) {
-            this.character.charged = true;
-            this.character.chargeUsedThisBattle = true;
-            this.terminal.print("\n[yellow]*** CHARGING POWER! ***[/yellow]");
-            this.terminal.print("You brace yourself, gathering power for a devastating strike!");
-            this.terminal.print("[cyan]Your next attack will deal DOUBLE damage![/cyan]");
-        } else {
-            this.terminal.print("\nYou take a defensive stance, preparing to block the next attack!");
-            this.terminal.print("[dim](Power Charge already used this battle)[/dim]");
-        }
+        // Charge is available (once per battle, validated in playerTurn)
+        this.character.charged = true;
+        this.character.chargeUsedThisBattle = true;
+        this.terminal.print("\n[yellow]*** CHARGING POWER! ***[/yellow]");
+        this.terminal.print("You brace yourself, gathering power for a devastating strike!");
+        this.terminal.print("[cyan]Your next attack will deal 1.5x damage![/cyan]");
         return 'continue';
     }
 

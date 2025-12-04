@@ -468,6 +468,7 @@ body {
 .bold { font-weight: bold; }
 .italic { font-style: italic; }
 .dim { opacity: 0.6; }
+.strike { text-decoration: line-through; opacity: 0.5; }
 
 /* Character class colors */
 .hero-class {

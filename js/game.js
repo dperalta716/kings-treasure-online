@@ -310,7 +310,7 @@ export class Game {
         // Part 1: The Legend
         this.terminal.showSprite(getLocationSprite('legend_king'), "The Legend");
         this.terminal.print("\n=== THE LEGEND ===");
-        this.terminal.print("\nFor generations, whispers have spread of the King's Treasure - a hoard of");
+        this.terminal.print("\nFor generations, whispers have spread of [yellow][bold]the King's Treasure[/bold][/yellow] - a hoard of");
         this.terminal.print("unimaginable wealth hidden in a castle at the edge of the known world.");
         this.terminal.print("\n[italic]Many have sought it. None have returned.[/italic]");
         await this.terminal.waitForEnter();
@@ -318,8 +318,8 @@ export class Game {
         // Part 2: The Map
         this.terminal.clear();
         this.terminal.showSprite(getLocationSprite('treasure_map'), "The Map");
-        this.terminal.print("\nBut recently, a map has come into your possession...");
-        this.terminal.print("\nThe path is fraught with danger: treacherous crossroads, ancient ruins,");
+        this.terminal.print("\nBut recently, [yellow][bold]a map[/bold][/yellow] has come into your possession...\n");
+        this.terminal.print("The path is fraught with danger: treacherous crossroads, ancient ruins,");
         this.terminal.print("and creatures that defy imagination.");
         this.terminal.print("\nYou gather your courage, check your gear, and set out on the journey of a lifetime...");
         await this.terminal.waitForEnter("Press Enter to begin your adventure...");
@@ -457,7 +457,7 @@ export class Game {
         this.terminal.showSprite(getLocationSprite('hidden_passages'), 'Hidden Passages');
         this.terminal.print("\n== THE HIDDEN PASSAGES ==");
         this.terminal.print("You've discovered secret paths within the stronghold!");
-        this.terminal.print("\n1. A passage where [cyan]strange crystals[/cyan] glint in the darkness");
+        this.terminal.print("\n1. A cavern passage where [cyan]jagged stalactites[/cyan] loom in the torchlight");
         this.terminal.print("2. A corridor lined with [yellow]ancient statues[/yellow] and faded symbols");
         this.terminal.print("\nWhich path do you take? (1/2)");
 
@@ -511,7 +511,7 @@ export class Game {
      */
     async convergencePaths() {
         this.terminal.showSprite(getLocationSprite('three_doors'), 'Three Doors');
-        this.terminal.print("\nYou stand before a vast landscape with three distinct regions:");
+        this.terminal.print("\nYou emerge from the depths and stand before a vast landscape with three distinct regions:");
         this.terminal.print("\n1. A crystalline land glowing with [cyan]purple and blue light[/cyan]");
         this.terminal.print("2. A volcanic mountain radiating [red]intense heat[/red]");
         this.terminal.print("3. An ocean coastline with [blue]sunken ruins[/blue] rising from the waves");

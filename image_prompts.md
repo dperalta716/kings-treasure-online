@@ -357,8 +357,8 @@ background with shields on walls
 ```
 16-bit pixel art, dark fantasy RPG game sprite, detailed shading,
 vibrant colors, elegant spear with blade made of razor-sharp red
-coral, seashell decorations on shaft, displayed in underwater
-shrine, ocean temple background
+coral, seashell decorations on shaft, held by ancient stone statue,
+underwater shrine, ocean temple background
 ```
 
 ### Crystal Blade

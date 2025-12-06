@@ -947,6 +947,19 @@ torch-lit stone chamber, THE KING'S TREASURE text in ornate golden
 letters at the top
 ```
 
+### The Legend - King's Greed
+**ID:** `legend_king`
+**Category:** locations
+
+```
+16-bit pixel art, dark fantasy RPG game scene, detailed shading,
+vibrant colors, close-up view from behind of king silhouette,
+arms raised triumphantly toward massive mountain of gold coins
+and glittering jewels, royal robes and crown visible in shadow,
+treasure hoard towering before him, golden glow illuminating
+the scene, greedy obsession, dark stone vault, no text
+```
+
 ### The King's Treasure
 **ID:** `treasure`
 **Category:** locations

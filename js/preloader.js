@@ -5,6 +5,7 @@
 // All sprite paths to preload
 const SPRITES = [
     // Locations
+    'assets/sprites/locations/legend_king.webp',
     'assets/sprites/locations/title_banner.webp',
     'assets/sprites/locations/thiefs_crossroads.webp',
     'assets/sprites/locations/lake.webp',

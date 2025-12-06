@@ -307,13 +307,17 @@ export class Game {
      * Story introduction - the legend of the treasure
      */
     async storyIntro() {
-        this.terminal.showSprite(getLocationSprite('treasure_map'), "The Legend");
+        // Part 1: The Legend
+        this.terminal.showSprite(getLocationSprite('legend_king'), "The Legend");
         this.terminal.print("\n=== THE LEGEND ===");
         this.terminal.print("\nFor generations, whispers have spread of the King's Treasure - a hoard of");
         this.terminal.print("unimaginable wealth hidden in a castle at the edge of the known world.");
         this.terminal.print("\n[italic]Many have sought it. None have returned.[/italic]");
         await this.terminal.waitForEnter();
 
+        // Part 2: The Map
+        this.terminal.clear();
+        this.terminal.showSprite(getLocationSprite('treasure_map'), "The Map");
         this.terminal.print("\nBut recently, a map has come into your possession...");
         this.terminal.print("\nThe path is fraught with danger: treacherous crossroads, ancient ruins,");
         this.terminal.print("and creatures that defy imagination.");

@@ -1,3 +1,6 @@
+# Claude Code skills (contains API keys)
+.claude/
+
 # Environment variables (API keys, secrets)
 .env
 .env.local

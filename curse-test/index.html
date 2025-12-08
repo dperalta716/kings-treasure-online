@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The King's Curse - Battle Test</title>
+    <link rel="stylesheet" href="../css/terminal.css">
+    <style>
+        /* Test mode banner */
+        .test-banner {
+            background: linear-gradient(135deg, #2d1f3d 0%, #1a1a2e 100%);
+            border: 2px solid #8b5cf6;
+            padding: 8px 15px;
+            text-align: center;
+            color: #a78bfa;
+            font-weight: bold;
+            font-size: 0.9em;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        /* Push content down to account for banner */
+        #game-container {
+            margin-top: 40px;
+        }
+
+        /* Companion section styling */
+        #companion-stats .section-title {
+            color: #a78bfa;
+        }
+
+        #companion-name {
+            font-weight: bold;
+            color: #c4b5fd;
+        }
+
+        #companion-role {
+            font-size: 0.85em;
+            color: #8b8ba0;
+            margin-bottom: 5px;
+        }
+
+        #companion-stats .hp-bar {
+            background: linear-gradient(90deg, #a78bfa, #c4b5fd);
+        }
+
+        .companion-unconscious {
+            opacity: 0.5;
+        }
+
+        /* Multi-enemy section */
+        #enemies-stats .section-title {
+            color: #ef4444;
+        }
+
+        .enemy-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 6px 0;
+            padding: 5px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+
+        .enemy-row.defeated {
+            opacity: 0.4;
+        }
+
+        .enemy-letter {
+            font-weight: bold;
+            color: #fbbf24;
+            width: 18px;
+            text-align: center;
+        }
+
+        .enemy-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .enemy-info .name {
+            font-size: 0.85em;
+            color: #e5e5e5;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .enemy-hp-mini {
+            height: 5px;
+            background: #333;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 3px;
+        }
+
+        .enemy-hp-mini .bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ef4444, #f87171);
+            transition: width 0.3s;
+        }
+
+        .enemy-hp-text {
+            font-size: 0.7em;
+            color: #888;
+            margin-top: 2px;
+        }
+
+        /* Curse indicator */
+        #curse-indicator {
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid #8b5cf6;
+            padding: 8px;
+            margin-top: 10px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        #curse-indicator .label {
+            color: #a78bfa;
+            font-size: 0.8em;
+            margin-bottom: 3px;
+        }
+
+        #curse-indicator .turns {
+            color: #c4b5fd;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Test Mode Banner -->
+    <div class="test-banner">CURSE BATTLE TEST MODE</div>
+
+    <div id="game-container">
+        <div id="main-column">
+            <div id="sprite-panel">
+                <img id="current-sprite" src="" alt="" style="display: none;">
+                <div id="sprite-grid"></div>
+                <div id="sprite-label"></div>
+            </div>
+            <div id="terminal">
+                <div id="output"></div>
+                <div id="input-line">
+                    <span>&gt; </span>
+                    <input type="text" id="command-input" autofocus autocomplete="off">
+                </div>
+            </div>
+        </div>
+        <div id="stats-sidebar">
+                <!-- Curse Indicator -->
+                <div id="curse-indicator" class="hidden">
+                    <div class="label">CURSE DRAIN</div>
+                    <div class="turns">Next drain in: <span id="curse-turns">3</span> turns</div>
+                </div>
+
+                <!-- Multi-Enemy Section (curse battles) -->
+                <div id="enemies-stats" class="stats-section hidden">
+                    <div class="section-title">ENEMIES</div>
+                    <div id="enemies-list"></div>
+                </div>
+
+                <!-- Single Enemy Section (kept for compatibility) -->
+                <div id="enemy-stats" class="stats-section hidden">
+                    <div class="section-title">ENEMY</div>
+                    <div id="enemy-name" class="enemy-name"></div>
+                    <div class="hp-row">
+                        <span class="label">HP</span>
+                        <div class="hp-bar-container">
+                            <div id="enemy-hp-bar" class="hp-bar"></div>
+                        </div>
+                        <span id="enemy-hp-text" class="hp-text"></span>
+                    </div>
+                    <div class="stat-row">
+                        <span>ATK: <span id="enemy-atk">0</span></span>
+                        <span>DEF: <span id="enemy-def">0</span></span>
+                    </div>
+                </div>
+
+                <!-- Hero Section -->
+                <div id="hero-stats" class="stats-section">
+                    <div class="section-title">HERO</div>
+                    <div class="stat-row">
+                        <span>Level <span id="hero-level">1</span> <span id="hero-class" class="hero-class"></span></span>
+                        <span id="hero-gold" class="gold-text">0 gold</span>
+                    </div>
+                    <div class="hp-row">
+                        <span class="label">HP</span>
+                        <div class="hp-bar-container">
+                            <div id="hero-hp-bar" class="hp-bar"></div>
+                        </div>
+                        <span id="hero-hp-text" class="hp-text"></span>
+                    </div>
+                    <div class="xp-row">
+                        <span class="label">XP</span>
+                        <div class="xp-bar-container">
+                            <div id="hero-xp-bar" class="xp-bar"></div>
+                        </div>
+                        <span id="hero-xp-text" class="xp-text"></span>
+                    </div>
+                </div>
+
+                <!-- Companion Section (curse battles) - hidden until companion joins -->
+                <div id="companion-stats" class="stats-section hidden">
+                    <div class="section-title">COMPANION</div>
+                    <div id="companion-name"></div>
+                    <div id="companion-role"></div>
+                    <div class="hp-row">
+                        <span class="label">HP</span>
+                        <div class="hp-bar-container">
+                            <div id="companion-hp-bar" class="hp-bar"></div>
+                        </div>
+                        <span id="companion-hp-text" class="hp-text"></span>
+                    </div>
+                </div>
+
+                <!-- Equipment Section -->
+                <div id="equipment-stats" class="stats-section">
+                    <div class="section-title">EQUIPMENT</div>
+                    <div class="equip-row">
+                        <span class="equip-icon">⚔️</span>
+                        <span id="weapon-name">Rusty Sword</span>
+                        <span id="weapon-dmg" class="stat-value">(3)</span>
+                    </div>
+                    <div class="equip-row">
+                        <span class="equip-icon">🛡️</span>
+                        <span id="shield-name">Wooden Buckler</span>
+                        <span id="shield-def" class="stat-value">(1)</span>
+                    </div>
+                </div>
+
+                <!-- Inventory Section -->
+                <div id="inventory-stats" class="stats-section">
+                    <div class="section-title">INVENTORY</div>
+                    <div id="potions-row" class="inv-row">
+                        <span class="inv-icon">&#9829;</span>
+                        <span>Health Potions</span>
+                        <span id="potion-count" class="inv-count">0</span>
+                    </div>
+                    <div id="superior-potions-row" class="inv-row hidden">
+                        <span class="inv-icon">&#9733;</span>
+                        <span>Superior Potions</span>
+                        <span id="superior-potion-count" class="inv-count">0</span>
+                    </div>
+                    <div id="strength-elixirs-row" class="inv-row hidden">
+                        <span class="inv-icon">&#9876;</span>
+                        <span>Strength Elixirs</span>
+                        <span id="strength-elixir-count" class="inv-count">0</span>
+                    </div>
+                    <div id="defense-potions-row" class="inv-row hidden">
+                        <span class="inv-icon">🛡</span>
+                        <span>Defense Potions</span>
+                        <span id="defense-potion-count" class="inv-count">0</span>
+                    </div>
+                    <div id="master-strength-row" class="inv-row hidden">
+                        <span class="inv-icon">&#9876;</span>
+                        <span>Master Strength</span>
+                        <span id="master-strength-count" class="inv-count">0</span>
+                    </div>
+                    <div id="ultimate-defense-row" class="inv-row hidden">
+                        <span class="inv-icon">🛡</span>
+                        <span>Ultimate Defense</span>
+                        <span id="ultimate-defense-count" class="inv-count">0</span>
+                    </div>
+                </div>
+
+                <!-- Spells Section -->
+                <div id="spells-stats" class="stats-section hidden">
+                    <div class="section-title">SPELLS</div>
+                    <div id="spells-list"></div>
+                </div>
+
+                <!-- Special Items Section -->
+                <div id="special-items-stats" class="stats-section hidden">
+                    <div class="section-title">SPECIAL ITEMS</div>
+                    <div id="special-items-list"></div>
+                </div>
+
+                <!-- Combat Buffs Section -->
+                <div id="buffs-stats" class="stats-section hidden">
+                    <div class="section-title">ACTIVE BUFFS</div>
+                    <div id="buffs-list"></div>
+                </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/curseMain.js"></script>
+</body>
+</html>

@@ -262,6 +262,8 @@ export class Game {
         this.terminal.print("\n[italic]What happens next? How will you remove the curse?[/italic]");
         this.terminal.print("[italic]Find out in the sequel...[/italic]");
 
+        await this.terminal.waitForEnter();
+
         this.terminal.print("\n[bold]═══════════════════════════════════════════════════════════[/bold]");
         this.terminal.print("\n[victory][bold]THE KING'S CURSE[/bold][/victory]");
         this.terminal.print("[italic]Coming Soon[/italic]");

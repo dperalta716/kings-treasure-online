@@ -21,36 +21,36 @@ export const ENEMY_DATA = {
     // Mid Game - Hidden Passages (Player Level 2-3) - MAJOR BUFFS to counter high defense
     stone_golem: { name: "Stone Golem", hp: 40, attack: 14, defense: 5, xp: 75, gold: 30, isBoss: false },
     giant_spider: { name: "Giant Spider", hp: 42, attack: 14, defense: 2, xp: 70, gold: 28, isBoss: false },
-    ancient_guardian: { name: "Ancient Guardian", hp: 42, attack: 15, defense: 4, xp: 80, gold: 32, isBoss: false },
-    cursed_mummy: { name: "Cursed Mummy", hp: 45, attack: 16, defense: 1, xp: 75, gold: 30, isBoss: false },
+    ancient_guardian: { name: "Ancient Guardian", hp: 42, attack: 15, defense: 3, xp: 80, gold: 32, isBoss: false },
+    cursed_mummy: { name: "Cursed Mummy", hp: 45, attack: 16, defense: 4, xp: 75, gold: 30, isBoss: false },
 
     // Convergence Paths (Player Level 3, HP 50-60)
     // Crystal Palace
-    crystal_guardian: { name: "Crystal Guardian", hp: 45, attack: 14, defense: 3, xp: 85, gold: 35, isBoss: false },
+    crystal_guardian: { name: "Crystal Guardian", hp: 45, attack: 16, defense: 3, xp: 85, gold: 35, isBoss: false },
     crystal_queen: { name: "Crystal Queen", hp: 55, attack: 18, defense: 4, xp: 95, gold: 42, isBoss: true },
 
     // Volcanic Forge
-    fire_elemental: { name: "Fire Elemental", hp: 42, attack: 15, defense: 2, xp: 80, gold: 35, isBoss: false },
+    fire_elemental: { name: "Fire Elemental", hp: 42, attack: 16, defense: 2, xp: 80, gold: 35, isBoss: false },
     forge_master: { name: "Forge Master", hp: 58, attack: 20, defense: 5, xp: 100, gold: 45, isBoss: true },
 
     // Sunken Ruins
-    merfolk_warrior: { name: "Merfolk Warrior", hp: 44, attack: 14, defense: 3, xp: 85, gold: 35, isBoss: false },
-    kraken: { name: "Kraken", hp: 60, attack: 22, defense: 4, xp: 105, gold: 48, isBoss: true },
+    merfolk_warrior: { name: "Merfolk Warrior", hp: 44, attack: 16, defense: 3, xp: 85, gold: 35, isBoss: false },
+    kraken: { name: "Kraken", hp: 60, attack: 22, defense: 5, xp: 105, gold: 48, isBoss: true },
 
     // Grand Finale (Player Level 4+, HP 60-70)
     // Phantom Citadel
-    spectral_sentinel: { name: "Spectral Sentinel", hp: 48, attack: 17, defense: 4, xp: 90, gold: 40, isBoss: false },
-    phantom_knight: { name: "Phantom Knight", hp: 55, attack: 19, defense: 5, xp: 100, gold: 45, isBoss: false },
+    spectral_sentinel: { name: "Spectral Sentinel", hp: 48, attack: 18, defense: 4, xp: 90, gold: 40, isBoss: false },
+    phantom_knight: { name: "Phantom Knight", hp: 55, attack: 20, defense: 5, xp: 100, gold: 45, isBoss: false },
     lord_of_echoes: { name: "Lord of Echoes", hp: 70, attack: 24, defense: 6, xp: 115, gold: 55, isBoss: true },
 
     // Clockwork Nexus
-    automaton_soldier: { name: "Automaton Soldier", hp: 50, attack: 18, defense: 5, xp: 92, gold: 42, isBoss: false },
-    clockmaker: { name: "The Clockmaker", hp: 58, attack: 20, defense: 5, xp: 105, gold: 48, isBoss: false },
+    automaton_soldier: { name: "Automaton Soldier", hp: 50, attack: 20, defense: 5, xp: 92, gold: 42, isBoss: false },
+    clockmaker: { name: "The Clockmaker", hp: 58, attack: 22, defense: 5, xp: 105, gold: 48, isBoss: false },
     time_warden: { name: "Time Warden", hp: 72, attack: 26, defense: 7, xp: 120, gold: 58, isBoss: true },
 
     // Forgotten Coliseum
-    gladiator_shade: { name: "Gladiator Shade", hp: 55, attack: 18, defense: 5, xp: 95, gold: 44, isBoss: false },
-    arena_master: { name: "Arena Master", hp: 65, attack: 20, defense: 6, xp: 108, gold: 50, isBoss: false },
+    gladiator_shade: { name: "Gladiator Shade", hp: 55, attack: 22, defense: 5, xp: 95, gold: 44, isBoss: false },
+    arena_master: { name: "Arena Master", hp: 65, attack: 24, defense: 6, xp: 108, gold: 50, isBoss: false },
     eternal_champion: { name: "The Eternal Champion", hp: 75, attack: 28, defense: 8, xp: 125, gold: 62, isBoss: true },
 
     // Final Guardian (after Grand Finale bosses)
@@ -100,7 +100,12 @@ export const WEAPON_DAMAGE = {
     // Special item weapons
     "Echo Blade": 10,
     "Pendulum Blade": 11,
-    "Legacy Blade": 15
+    "Legacy Blade": 15,
+
+    // Curse expansion weapons
+    "Curse Reaver": 16,
+    "Shadow's Edge": 18,
+    "Soul Render": 20
 };
 
 // =============================================================================
@@ -120,7 +125,12 @@ export const SHIELD_DEFENSE = {
     "Adamantine Shield": 5,
     "Ethereal Shield": 4,
     "Gear Shield": 3,
-    "Gladiator's Shield": 4
+    "Gladiator's Shield": 4,
+
+    // Curse expansion shields
+    "Void-Touched Shield": 6,
+    "Warden's Barrier": 7,
+    "Celestial Shield": 8
 };
 
 // =============================================================================
@@ -343,6 +353,28 @@ export const SPELLS = {
         damage: 15,
         healPercent: 100,
         description: "Deal 15 damage and heal for same amount"
+    },
+    // Part 2 (Curse expansion) spells
+    "Void Bolt": {
+        unlockLevel: 5,
+        type: "aoe",
+        totalDamage: 20,
+        isAoE: true,
+        description: "Void energy strikes all enemies (20 damage split)"
+    },
+    "Chain Lightning": {
+        unlockLevel: 6,
+        type: "aoe",
+        totalDamage: 24,
+        isAoE: true,
+        description: "Lightning arcs between all enemies (24 damage split)"
+    },
+    "Cursed Wave": {
+        unlockLevel: 7,
+        type: "aoe",
+        totalDamage: 28,
+        isAoE: true,
+        description: "A wave of cursed energy hits all foes (28 damage split)"
     }
 };
 

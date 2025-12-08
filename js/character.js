@@ -189,6 +189,19 @@ export class Character {
                 this.spells.push("Astral Strike");
                 levelUpInfo.newSpell = SPELLS["Astral Strike"];
                 levelUpInfo.newSpell.name = "Astral Strike";
+            } else if (this.level === 5) {
+                // Part 2 spells
+                this.spells.push("Void Bolt");
+                levelUpInfo.newSpell = SPELLS["Void Bolt"];
+                levelUpInfo.newSpell.name = "Void Bolt";
+            } else if (this.level === 6) {
+                this.spells.push("Chain Lightning");
+                levelUpInfo.newSpell = SPELLS["Chain Lightning"];
+                levelUpInfo.newSpell.name = "Chain Lightning";
+            } else if (this.level === 7) {
+                this.spells.push("Cursed Wave");
+                levelUpInfo.newSpell = SPELLS["Cursed Wave"];
+                levelUpInfo.newSpell.name = "Cursed Wave";
             }
 
             levelUps.push(levelUpInfo);

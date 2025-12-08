@@ -24,7 +24,15 @@ See existing entries below for format. Categories: enemies, weapons, shields, sp
 
 ---
 
-## Enemies (25)
+## Enemies (26)
+
+### Curse Shades (Battle 1)
+**ID:** `curse_shades`
+**Category:** enemies
+
+```
+16-bit pixel art, dark fantasy RPG game scene, detailed shading, vibrant colors, two curse shade creatures side by side, twisted dark silhouettes with jagged edges, pitch black bodies with purple curse markings, burning violet eyes, clawed shadowy hands reaching forward, dark smoke emanating from forms, corrupted spirits emerging from darkness, hunched aggressive stances, emerging from cursed forest clearing, blackened trees with glowing purple sap, dark mist pooling on ground, eerie bioluminescent mushrooms, haunted atmosphere
+```
 
 ### Ancient Guardian
 **ID:** `ancient_guardian`
@@ -1231,4 +1239,262 @@ piercing eyes watching from shadow of hood, dual wielding wicked
 curved daggers, crouched predatory stance emerging from shadows,
 deadly and graceful, dark misty forest background with fog rolling
 between ancient trees, moody atmosphere, no text, no UI elements
+```
+
+---
+
+# THE KING'S CURSE EXPANSION
+
+Art assets for the curse storyline expansion. All battles feature the curse's purple/magenta corruption theme.
+
+---
+
+## Curse Enemies (11 Battles)
+
+### Battle 1: Curse Shades (1v2 Solo)
+**ID:** `curse_shades`
+**Category:** curse_enemies
+
+```
+16-bit pixel art, dark fantasy RPG game scene, detailed shading, vibrant colors, two hooded curse shade spirits side by side, wearing flowing deep purple robes with hoods obscuring faces, glowing magenta eyes burning from within the darkness of their hoods, gaunt emaciated hands with long thin fingers reaching out from sleeves, no legs visible as robes fade into swirling purple spectral flame energy, spectral chains of purple energy dangling from their hands ready to bind, wisps of purple magical fire curling around their forms, floating menacingly, emerging from dark forest with twisted trees and fog, eerie purple glow illuminating the scene
+```
+
+### Battle 2: Curse Captor (1v1 Solo)
+**ID:** `curse_captor`
+**Category:** curse_enemies
+
+```
+16-bit pixel art, dark fantasy RPG game scene, detailed shading, vibrant colors, cursed bison jailer, massive muscular human torso with purple-veined corrupted skin covered in patches of thick dark bison fur, powerful bison head with shaggy mane and beard, curved horns cracked and glowing with purple curse energy, burning magenta eyes filled with torment, heavy iron chains wrapped around fur-covered forearms used to bind prisoners, bipedal bison legs with thick fur and cloven hooves leaving purple embers with each step, wearing tattered remnants of a prison warden's vest stretched over broad chest, ancient rusted keys hanging from belt, standing guard in corrupted dungeon cell, stone walls covered in purple curse runes, iron bars bent and corroded, torch flames burning purple, imposing and tragic figure
+```
+
+### Battle 3: Void Crawler & Shadow Stalker (2v2 with Companion)
+**ID:** `void_crawler_shadow_stalker`
+**Category:** curse_enemies
+
+```
+16-bit pixel art, dark fantasy RPG game scene, detailed shading, vibrant colors, two creatures side by side, void crawler on left as a spider-like beast with too many legs made of pure darkness with purple void energy between joints, shadow stalker on right as a hunched wolf-like predator made of living shadow with piercing violet eyes and smoky tendrils trailing behind, descending into cursed depths, ancient stone stairs leading down into purple-lit abyss, corrupted roots breaking through walls, eerie glow from below
+```
+
+### Battle 4: Corrupted Miner & Void Spitter (2v2 with Companion)
+**ID:** `corrupted_miner_void_spitter`
+**Category:** curse_enemies
+
+```
+16-bit pixel art, dark fantasy RPG game scene, detailed shading, vibrant colors, two creatures in corrupted mine passage, corrupted miner on left as a twisted humanoid with pickaxe fused to arm and purple crystals growing from body and hollow glowing eyes, void spitter on right as a bloated creature with distended belly and mouth dripping with purple void liquid ready to spray, abandoned mine tunnel background with purple crystal veins in walls, broken mining equipment, cursed lanterns flickering
+```
+
+### Battle 5: Depth Horror (2v1 Boss with Companion)
+**ID:** `depth_horror`
+**Category:** curse_enemies
+
+```
+16-bit pixel art, dark fantasy RPG game scene, detailed shading, vibrant colors, massive depth horror boss creature, enormous eldritch abomination filling the cavern, multiple eyes glowing different shades of purple and magenta, tentacles and appendages reaching from a central mass of corruption, armored carapace cracked with purple light seeping through, towering over the scene menacingly, deep underground cavern background with bioluminescent curse fungi, dripping stalactites, bones of previous victims scattered below
+```
+
+### Battle 6: Curse Spawn Swarm (2v3 with Companion)
+**ID:** `curse_spawn_swarm`
+**Category:** curse_enemies
+
+```
+16-bit pixel art, dark fantasy RPG game scene, detailed shading, vibrant colors, three curse spawn creatures attacking together, small imp-like beings made of solidified curse energy, sharp teeth and claws, erratic chaotic poses mid-leap and attack, purple flames trailing from their forms, glowing violet eyes filled with hunger, swarm mentality visible in their coordinated assault, narrow cursed corridor background with purple veins pulsing in walls, shattered statues, flickering torches with purple flames
+```
+
+### Battle 7: Void Knight & Cursed Sentinel (2v2 with Companion)
+**ID:** `void_knight_cursed_sentinel`
+**Category:** curse_enemies
+
+```
+16-bit pixel art, dark fantasy RPG game scene, detailed shading, vibrant colors, two elite guards side by side, void knight on left in heavy black armor with purple runes glowing on plates wielding massive void-touched greatsword with cape of shadow, cursed sentinel on right as a floating armored torso with no legs surrounded by orbiting purple crystals wielding shield and spear of pure curse energy, grand corrupted hallway background with fallen pillars, tattered banners, purple light streaming through shattered windows
+```
+
+### Battle 8: Serpent Lord & Serpent Guard (2v2 Boss with Companion)
+**ID:** `serpent_lord_battle`
+**Category:** curse_enemies
+
+```
+16-bit pixel art, dark fantasy RPG game scene, detailed shading, vibrant colors, serpent lord boss with minion, serpent lord as massive humanoid-snake hybrid with ornate dark crown and purple scales wielding curved sacrificial blade and scepter of corruption, serpent guard beside as smaller snake warrior with spear and shield bearing serpent crest, throne room of corruption background with snake statues, purple braziers, cracked marble floor with curse veins spreading
+```
+
+### Battle 9: The Cursed King (2v1 Boss with Companion)
+**ID:** `cursed_king`
+**Category:** curse_enemies
+
+```
+16-bit pixel art, dark fantasy RPG game scene, detailed shading, vibrant colors, the cursed king as tragic boss figure, once-noble king now twisted by curse with crown fused to skull, royal armor cracked and corrupted with purple energy bleeding through, wielding cursed royal sword and shield with kingdom's broken crest, expression of anguish and rage, royal throne room completely overtaken by curse, shattered stained glass, throne covered in purple crystalline growth, ghostly echoes of former glory
+```
+
+### Battle 10: Your Wraith Self (1v1 Solo)
+**ID:** `wraith_self`
+**Category:** curse_enemies
+
+```
+16-bit pixel art, dark fantasy RPG game scene, detailed shading, vibrant colors, wraith self as dark twisted version of an adventurer, same general silhouette but made of purple-black smoke and malice, glowing violet eyes, wielding shadow versions of weapons, cracks of light showing the original soul trapped within, standing in a void space between worlds, floating shattered reality fragments, purple lightning crackling between void spaces, existential dread atmosphere
+```
+
+### Battle 11: Malachar The Demon King (1v1 Solo Final Boss)
+**ID:** `malachar`
+**Category:** curse_enemies
+
+```
+16-bit pixel art, dark fantasy RPG game scene, detailed shading, vibrant colors, Malachar the Demon King as ultimate final boss, tall regal figure with deathly pale white skin with subtle purple tinge, flowing white hair, wearing ornate white and silver armor with purple corruption veins creeping through, noble angular face with burning violet eyes, elegant crown of twisted silver, carries scepter of pure curse energy, cape of pristine white stained with purple corruption at edges, aristocratic and terrifying, demonic throne room background with rivers of purple energy, black stone pillars, atmosphere of fallen divine beauty turned to darkness
+```
+
+---
+
+## Curse Companions
+
+### Kira the Wounded Healer
+**ID:** `kira_companion`
+**Category:** curse_companions
+
+```
+16-bit pixel art, dark fantasy RPG game scene, detailed shading, vibrant colors, Kira the wounded healer companion, young woman with short silver hair and kind but pained eyes, simple white and blue robes torn and stained, bandages on arms showing old wounds, gentle healing light emanating from hands, carrying a small satchel of herbs and medicines, determined expression despite exhaustion, standing ready to support allies, soft blue healing aura contrasting the purple corruption around, hope in darkness
+```
+
+### Auren the Fallen Angel
+**ID:** `auren_companion`
+**Category:** curse_companions
+
+```
+16-bit pixel art, dark fantasy RPG game scene, detailed shading, vibrant colors, Auren the fallen angel companion, tall imposing figure with tarnished golden armor showing signs of battle and age, one wing of faded white feathers and one wing broken and bound in bandages, stern noble face with glowing soft golden eyes, wielding holy mace with fading divine light, halo cracked but still present, standing as stalwart protector, divine golden glow fighting against the purple curse corruption, redemption seeking warrior
+```
+
+---
+
+## Curse Character Intros (Editing Template)
+
+These are created by **editing** the existing character sprites, not generating from scratch.
+Use Gemini 3 Pro image editing with the base character sprite as input.
+
+### Cursed Character Intro (Editing Prompt Template)
+**Type:** Image Edit (not generation)
+**Source:** Base character sprite from `assets/sprites/characters/`
+
+```
+Transform this warrior into an early-stage cursed version of himself experiencing agony:
+- Change his pose to kneeling on the ground with arms raised slightly upward in torment, face looking up to the sky in anguish
+- Give his skin a purplish tint with purple corruption veins visible on his arms and neck
+- Make his eyes glow with faint purple light
+- Darken and corrupt his armor/clothes with purple energy seeping through cracks
+- Keep him in the foreground, larger in frame
+- Transform the forest background to look more ominous - darker trees, purple mist creeping in, more foreboding atmosphere
+- Maintain the 16-bit pixel art style
+```
+
+**Characters to create:**
+- [x] `cursed_warrior_intro` (male) - Created from `male_warrior.webp`
+- [ ] `cursed_warrior_intro_f` - Create from `female_warrior.webp`
+- [ ] `cursed_mage_intro` (male) - Create from `male_mage.webp`
+- [ ] `cursed_mage_intro_f` - Create from `female_mage.webp`
+- [ ] `cursed_rogue_intro` (male) - Create from `male_rogue.webp`
+- [ ] `cursed_rogue_intro_f` - Create from `female_rogue.webp`
+
+**Note:** Adjust "warrior" to "mage" or "rogue" and "his" to "her" as needed for each variation.
+
+---
+
+## Curse Weapons
+
+### Curse Reaver
+**ID:** `curse_reaver`
+**Category:** curse_weapons
+
+```
+16-bit pixel art, dark fantasy RPG game sprite, detailed shading, vibrant colors, Curse Reaver sword, jagged black blade with purple veins of captured curse energy running through metal, crossguard shaped like screaming faces, grip wrapped in dark leather with purple gem pommel, blade seems to drink in light around it, displayed on altar of purification with candles, no character
+```
+
+### Shadow's Edge
+**ID:** `shadows_edge`
+**Category:** curse_weapons
+
+```
+16-bit pixel art, dark fantasy RPG game sprite, detailed shading, vibrant colors, Shadow's Edge blade, elegant longsword made of solidified shadow, blade shifts between black and deep purple, edge glows with violet light, minimalist crossguard of pure darkness, handle wrapped in shadow-silk, wisps of darkness trail from blade, displayed floating in void space with purple energy, no character
+```
+
+### Soul Render
+**ID:** `soul_render`
+**Category:** curse_weapons
+
+```
+16-bit pixel art, dark fantasy RPG game sprite, detailed shading, vibrant colors, Soul Render ultimate weapon, massive greatsword torn from wraith self, blade half corporeal half ghostly energy, purple and white energy swirling within blade, crossguard of captured souls, handle of bound spirits, most powerful curse-slaying weapon, radiates both light and darkness, displayed in dramatic void backdrop with soul energy, no character
+```
+
+---
+
+## Curse Shields
+
+### Void-Touched Shield
+**ID:** `void_touched_shield`
+**Category:** curse_shields
+
+```
+16-bit pixel art, dark fantasy RPG game sprite, detailed shading, vibrant colors, Void-Touched Shield, round shield of dark metal with purple void energy swirling in center, edge rimmed with protective runes, surface shows glimpses of the void dimension, absorbs curse energy visible as purple wisps being drawn in, practical battle-worn design, displayed on stone wall mount, no character
+```
+
+### Warden's Barrier
+**ID:** `wardens_barrier`
+**Category:** curse_shields
+
+```
+16-bit pixel art, dark fantasy RPG game sprite, detailed shading, vibrant colors, Warden's Barrier tower shield, tall rectangular shield of deep stone gray with purple crystal reinforcements, ancient warden symbols carved into surface, designed to protect against the depths' horrors, scratched and battle-tested but unbroken, faint protective aura, displayed in underground armory, no character
+```
+
+### Celestial Shield
+**ID:** `celestial_shield`
+**Category:** curse_shields
+
+```
+16-bit pixel art, dark fantasy RPG game sprite, detailed shading, vibrant colors, Celestial Shield divine protection, ornate kite shield of gleaming silver-gold with angelic wing motifs, center bears symbol of divine light actively repelling purple curse energy, blessed by Auren's remaining divine power, most protective shield against corruption, displayed on sacred altar with holy light, no character
+```
+
+---
+
+## Curse Locations
+
+### Cursed Forest Entrance
+**ID:** `cursed_forest_entrance`
+**Category:** curse_locations
+
+```
+16-bit pixel art, dark fantasy RPG game scene, detailed shading, vibrant colors, cursed forest entrance location, twisted dead trees forming an ominous archway, purple bioluminescent fungi growing on bark, thick fog with purple tint rolling along ground, path leading into darkness, healthy forest visible behind transitioning to corruption ahead, eerie silence atmosphere, no characters
+```
+
+### The Depths
+**ID:** `the_depths`
+**Category:** curse_locations
+
+```
+16-bit pixel art, dark fantasy RPG game scene, detailed shading, vibrant colors, the depths underground location, massive cavern system with purple crystal formations, ancient stone stairs descending into darkness, curse veins pulsing in walls like arteries, abandoned mining equipment, bones scattered, oppressive atmosphere of ancient evil, bioluminescent curse fungi providing eerie light, no characters
+```
+
+### Serpent Throne Room
+**ID:** `serpent_throne_room`
+**Category:** curse_locations
+
+```
+16-bit pixel art, dark fantasy RPG game scene, detailed shading, vibrant colors, serpent lord throne room location, grand corrupted chamber with massive snake statues flanking central throne, purple braziers burning with curse flame, cracked marble floor with curse veins spreading from throne, tattered serpent banners hanging, sacrificial altar visible, dark opulent evil atmosphere, no characters
+```
+
+### Cursed King's Chamber
+**ID:** `cursed_kings_chamber`
+**Category:** curse_locations
+
+```
+16-bit pixel art, dark fantasy RPG game scene, detailed shading, vibrant colors, cursed king throne room location, once-magnificent royal chamber now consumed by corruption, shattered stained glass depicting kingdom's fall, throne completely overtaken by purple crystalline growth, royal banners torn, ghostly images of former courtiers visible in purple mist, tragic atmosphere of fallen glory, no characters
+```
+
+### The Void Between
+**ID:** `void_between`
+**Category:** curse_locations
+
+```
+16-bit pixel art, dark fantasy RPG game scene, detailed shading, vibrant colors, void between worlds location, abstract space where reality breaks down, floating shattered mirror fragments reflecting different realities, purple lightning crackling between void spaces, no ground visible just endless purple-black void, existential horror atmosphere, where wraith self battle occurs, no characters
+```
+
+### Malachar's Throne
+**ID:** `malachars_throne`
+**Category:** curse_locations
+
+```
+16-bit pixel art, dark fantasy RPG game scene, detailed shading, vibrant colors, Malachar's demonic throne room final boss arena, heart of the curse itself, massive chamber of black stone and purple fire, rivers of curse energy flowing like blood through channels, throne of skulls and bones at center, demonic architecture with impossible angles, apocalyptic atmosphere, source of all corruption, no characters
 ```

@@ -54,6 +54,7 @@ export class Game {
 
         this.terminal.print("\n[bold]Choose Your Path[/bold]");
         this.terminal.print("[dim](Press 1-3 or arrows to preview, Enter to confirm)[/dim]\n");
+        await this.terminal.delay(800);
         this.terminal.print("1. [red]WARRIOR[/red] - A battle-hardened soldier");
         this.terminal.print("   HP: 30 | ATK: 5 | DEF: 2");
         this.terminal.print("\n2. [magenta]MAGE[/magenta] - A wielder of arcane power");
@@ -75,9 +76,9 @@ export class Game {
                 previewClass = classMap[input];
                 classIndex = classList.indexOf(previewClass);
                 this.terminal.showSprite(getCharacterSprite(`${gender}_${previewClass}`), classNames[previewClass]);
-            } else if (input === '__UP__' || input === '__DOWN__') {
-                // Arrow key navigation
-                if (input === '__UP__') {
+            } else if (input === '__UP__' || input === '__DOWN__' || input === '__LEFT__' || input === '__RIGHT__') {
+                // Arrow key navigation (up/left = previous, down/right = next)
+                if (input === '__UP__' || input === '__LEFT__') {
                     classIndex = (classIndex - 1 + classList.length) % classList.length;
                 } else {
                     classIndex = (classIndex + 1) % classList.length;

@@ -61,7 +61,9 @@ export class GroupBattle {
             this.curseSidebar.updateCompanion(this.companion);
         }
         this.curseSidebar.updateEnemies(this.enemies);
-        this.curseSidebar.updateCurseTurns(this.curseDrainInterval - (this.turnCount % this.curseDrainInterval));
+        // Calculate turns until drain: starts at 3, counts down to 1, then drain happens
+        const turnsUntilDrain = this.curseDrainInterval - ((this.turnCount - 1) % this.curseDrainInterval);
+        this.curseSidebar.updateCurseTurns(turnsUntilDrain);
     }
 
     /**
@@ -653,15 +655,19 @@ export class GroupBattle {
                     this.terminal.print(`Your Gear Shield reflects ${reflectDamage} damage back at [bold]${enemy.name}[/bold]!`);
                     if (enemy.takeDamage(reflectDamage)) {
                         this.terminal.print(`Your Gear Shield reflection defeated [bold]${enemy.name}[/bold]!`);
+                        this.curseSidebar.updateEnemies(this.enemies);  // Immediate enemy HP update
                         // Check if all enemies defeated
                         if (this.checkVictory()) {
                             return 'victory';
                         }
+                    } else {
+                        this.curseSidebar.updateEnemies(this.enemies);  // Immediate enemy HP update
                     }
                 }
 
                 this.terminal.print(`${enemy.name} attacks you for [red]${damage}[/red] damage!`);
                 const isDead = this.character.takeDamage(damage);
+                this.terminal.sidebar.updateHero(this.character);  // Immediate HP update
 
                 // Gladiator Shield counter-attack (25% chance)
                 if (this.character.hasGladiatorShield && Math.random() < 0.25 && !isDead && enemy.hp > 0) {
@@ -670,10 +676,13 @@ export class GroupBattle {
                     this.terminal.print(`Your shield strikes back for [red]${counterDamage}[/red] damage!`);
                     if (enemy.takeDamage(counterDamage)) {
                         this.terminal.print(`[green]${enemy.name} defeated by counter-attack![/green]`);
+                        this.curseSidebar.updateEnemies(this.enemies);  // Immediate enemy HP update
                         // Check if all enemies defeated
                         if (this.checkVictory()) {
                             return 'victory';
                         }
+                    } else {
+                        this.curseSidebar.updateEnemies(this.enemies);  // Immediate enemy HP update
                     }
                 }
 
@@ -683,6 +692,7 @@ export class GroupBattle {
                     if (healAmount > 0) {
                         this.character.hp += healAmount;
                         this.terminal.print(`\nYour Ethereal Shield shimmers, restoring [green]${healAmount}[/green] HP!`);
+                        this.terminal.sidebar.updateHero(this.character);  // Immediate HP update
                     }
                 }
 
@@ -693,6 +703,7 @@ export class GroupBattle {
                 // Companion takes damage
                 const fainted = this.companion.takeDamage(damage);
                 this.terminal.print(`${enemy.name} attacks ${this.companion.name} for [red]${damage}[/red] damage!`);
+                this.curseSidebar.updateCompanion(this.companion);  // Immediate HP update
 
                 if (fainted) {
                     this.terminal.print(`[yellow]${this.companion.name} collapses![/yellow]`);
@@ -709,10 +720,12 @@ export class GroupBattle {
     /**
      * Apply curse HP drain
      */
-    applyCurseDrain() {
+    async applyCurseDrain() {
         this.terminal.print(`\n[magenta]${CURSE_CONFIG.drainMessage}[/magenta]`);
         this.terminal.print(`You lose [red]${this.curseDrainAmount}[/red] HP from the curse!`);
         const isDead = this.character.takeDamage(this.curseDrainAmount);
+        this.terminal.sidebar.updateHero(this.character);  // Immediate HP update
+        await this.terminal.delay(1500);  // Pause to read curse drain message
 
         if (isDead) {
             this.terminal.print("\n[red]The curse has consumed you...[/red]");
@@ -871,13 +884,13 @@ export class GroupBattle {
 
             // Curse drain check
             if (this.turnCount % this.curseDrainInterval === 0) {
-                if (this.applyCurseDrain()) {
+                if (await this.applyCurseDrain()) {
                     this.terminal.defeatBanner();
                     this.terminal.print("[red]The curse has fully consumed you. You are now a Wraith forever...[/red]");
                     this.curseSidebar.hideCombat();
                     return false;
                 }
-                this.updateSidebar();
+                // Don't update sidebar here - next turn will reset countdown to 3
             }
 
             await this.terminal.delay(300);

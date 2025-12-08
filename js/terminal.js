@@ -105,11 +105,16 @@ export class Terminal {
                 this.inputResolve(value);
                 this.inputResolve = null;
             }
-        } else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+        } else if (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
             e.preventDefault();
             if (this.inputResolve) {
-                const direction = e.key === 'ArrowUp' ? '__UP__' : '__DOWN__';
-                this.inputResolve(direction);
+                const directionMap = {
+                    'ArrowUp': '__UP__',
+                    'ArrowDown': '__DOWN__',
+                    'ArrowLeft': '__LEFT__',
+                    'ArrowRight': '__RIGHT__'
+                };
+                this.inputResolve(directionMap[e.key]);
                 this.inputResolve = null;
                 // Re-activate input for next prompt
                 this.inputActive = false;

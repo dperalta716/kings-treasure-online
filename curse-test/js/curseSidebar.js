@@ -66,6 +66,7 @@ export class CurseSidebar {
 
     /**
      * Update multi-enemy display
+     * Reuses existing DOM elements for smooth CSS transitions
      */
     updateEnemies(enemies) {
         if (!enemies || enemies.length === 0) {
@@ -74,50 +75,71 @@ export class CurseSidebar {
         }
 
         this.enemiesSection.classList.remove('hidden');
-        this.enemiesList.innerHTML = '';
+
+        // Get existing rows or create new ones as needed
+        const existingRows = this.enemiesList.querySelectorAll('.enemy-row');
 
         enemies.forEach((enemy, index) => {
-            const number = index + 1;
-            const row = document.createElement('div');
-            row.className = 'enemy-row';
+            let row = existingRows[index];
+
+            if (!row) {
+                // Create new row if it doesn't exist
+                row = document.createElement('div');
+                row.className = 'enemy-row';
+                row.dataset.index = index;
+
+                const numberSpan = document.createElement('span');
+                numberSpan.className = 'enemy-letter';
+                numberSpan.textContent = index + 1;
+
+                const infoDiv = document.createElement('div');
+                infoDiv.className = 'enemy-info';
+
+                const nameSpan = document.createElement('div');
+                nameSpan.className = 'name';
+
+                const hpBar = document.createElement('div');
+                hpBar.className = 'enemy-hp-mini';
+
+                const hpFill = document.createElement('div');
+                hpFill.className = 'bar';
+
+                const hpText = document.createElement('div');
+                hpText.className = 'enemy-hp-mini-text';
+
+                hpBar.appendChild(hpFill);
+                infoDiv.appendChild(nameSpan);
+                infoDiv.appendChild(hpBar);
+                infoDiv.appendChild(hpText);
+
+                row.appendChild(numberSpan);
+                row.appendChild(infoDiv);
+
+                this.enemiesList.appendChild(row);
+            }
+
+            // Update existing elements (triggers CSS transition)
+            const nameSpan = row.querySelector('.name');
+            const hpFill = row.querySelector('.bar');
+            const hpText = row.querySelector('.enemy-hp-mini-text');
 
             if (enemy.hp <= 0) {
                 row.classList.add('defeated');
+                nameSpan.textContent = `${enemy.name} [DEFEATED]`;
+            } else {
+                row.classList.remove('defeated');
+                nameSpan.textContent = enemy.name;
             }
 
-            const numberSpan = document.createElement('span');
-            numberSpan.className = 'enemy-letter';  // Keep class name for styling
-            numberSpan.textContent = number;
-
-            const infoDiv = document.createElement('div');
-            infoDiv.className = 'enemy-info';
-
-            const nameSpan = document.createElement('div');
-            nameSpan.className = 'name';
-            nameSpan.textContent = enemy.hp > 0 ? enemy.name : `${enemy.name} [DEFEATED]`;
-
-            const hpBar = document.createElement('div');
-            hpBar.className = 'enemy-hp-mini';
-
-            const hpFill = document.createElement('div');
-            hpFill.className = 'bar';
             const hpPercent = Math.max(0, (enemy.hp / enemy.maxHp) * 100);
             hpFill.style.width = `${hpPercent}%`;
-
-            const hpText = document.createElement('div');
-            hpText.className = 'enemy-hp-mini-text';
             hpText.textContent = `${enemy.hp}/${enemy.maxHp}`;
-
-            hpBar.appendChild(hpFill);
-            infoDiv.appendChild(nameSpan);
-            infoDiv.appendChild(hpBar);
-            infoDiv.appendChild(hpText);
-
-            row.appendChild(numberSpan);
-            row.appendChild(infoDiv);
-
-            this.enemiesList.appendChild(row);
         });
+
+        // Remove extra rows if enemies list shrunk (shouldn't happen in battle)
+        while (existingRows.length > enemies.length) {
+            this.enemiesList.removeChild(existingRows[existingRows.length - 1]);
+        }
     }
 
     /**

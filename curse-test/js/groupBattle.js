@@ -125,7 +125,7 @@ export class GroupBattle {
         if (shielder && enrager) {
             this.terminal.print("");
             this.terminal.print("[yellow]*** TACTICAL WARNING ***[/yellow]");
-            this.terminal.print(`[cyan]${shielder.name}[/cyan] shields [cyan]${enrager.name}[/cyan], reducing damage by 50%!`);
+            this.terminal.print(`[cyan]${shielder.name}[/cyan] shields [cyan]${enrager.name}[/cyan], reducing damage to ${enrager.name} by 50%!`);
             this.terminal.print(`But if ${shielder.name} falls, ${enrager.name} will [red]ENRAGE[/red]!`);
             this.terminal.print("");
             await this.terminal.waitForEnter();

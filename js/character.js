@@ -405,6 +405,13 @@ export class Enemy {
         this.xpReward = data.xp;
         this.goldReward = data.gold;
         this.isBoss = data.isBoss || false;
+
+        // Shield/enrage mechanics (for curse expansion)
+        this.shieldsAlly = data.shieldsAlly || null;
+        this.enrageOnAllyDeath = data.enrageOnAllyDeath || null;
+        this.enrageBonus = data.enrageBonus || 0;
+        this.isEnraged = false;
+        this.frozen = false;
     }
 
     /**

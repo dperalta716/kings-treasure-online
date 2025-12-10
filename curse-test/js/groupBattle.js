@@ -117,7 +117,7 @@ export class GroupBattle {
     /**
      * Display special battle mechanics at start (shield/enrage warning)
      */
-    displayBattleMechanics() {
+    async displayBattleMechanics() {
         // Check for shield mechanics
         const shielder = this.enemies.find(e => e.shieldsAlly);
         const enrager = this.enemies.find(e => e.enrageOnAllyDeath);
@@ -128,6 +128,7 @@ export class GroupBattle {
             this.terminal.print(`[cyan]${shielder.name}[/cyan] shields [cyan]${enrager.name}[/cyan], reducing damage by 50%!`);
             this.terminal.print(`But if ${shielder.name} falls, ${enrager.name} will [red]ENRAGE[/red]!`);
             this.terminal.print("");
+            await this.terminal.waitForEnter();
         }
     }
 
@@ -913,12 +914,13 @@ export class GroupBattle {
         this.updateSidebar();
         this.displayEnemies();
 
-        // Show special mechanics warning (shield/enrage)
-        this.displayBattleMechanics();
-
+        // Boss warning first
         if (this.isBossBattle) {
             this.terminal.bossWarning();
         }
+
+        // Show special mechanics warning (shield/enrage) after boss warning
+        await this.displayBattleMechanics();
 
         // Battle loop
         while (true) {

@@ -160,19 +160,30 @@ export class Character {
             // Store old values for display
             const oldMaxHp = this.baseMaxHp;
 
-            // Apply bonuses (level 4+ gets +15 HP, others get +10)
-            const hpGain = this.level >= 4 ? 15 : LEVEL_UP_BONUSES.hp;
+            // Apply bonuses (scaling increases for Part 2)
+            // HP: +10 (levels 2-3), +15 (levels 4-5), +20 (levels 6+)
+            // Defense: +1 (levels 2-5), +2 (levels 6+)
+            let hpGain = LEVEL_UP_BONUSES.hp;
+            let defenseGain = LEVEL_UP_BONUSES.defense;
+
+            if (this.level >= 6) {
+                hpGain = 20;
+                defenseGain = 2;
+            } else if (this.level >= 4) {
+                hpGain = 15;
+            }
+
             this.baseMaxHp += hpGain;
             this.maxHp = this.baseMaxHp + this.tempHpBoost;
             this.hp = this.maxHp;  // Full heal on level up
             this.attack += LEVEL_UP_BONUSES.attack;
-            this.defense += LEVEL_UP_BONUSES.defense;
+            this.defense += defenseGain;
 
             const levelUpInfo = {
                 newLevel: this.level,
                 hpGain: hpGain,
                 attackGain: LEVEL_UP_BONUSES.attack,
-                defenseGain: LEVEL_UP_BONUSES.defense,
+                defenseGain: defenseGain,
                 newSpell: null
             };
 

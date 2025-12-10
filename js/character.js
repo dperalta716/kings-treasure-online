@@ -160,8 +160,8 @@ export class Character {
             // Store old values for display
             const oldMaxHp = this.baseMaxHp;
 
-            // Apply bonuses (level 4 gets +15 HP, others get +10)
-            const hpGain = this.level === 4 ? 15 : LEVEL_UP_BONUSES.hp;
+            // Apply bonuses (level 4+ gets +15 HP, others get +10)
+            const hpGain = this.level >= 4 ? 15 : LEVEL_UP_BONUSES.hp;
             this.baseMaxHp += hpGain;
             this.maxHp = this.baseMaxHp + this.tempHpBoost;
             this.hp = this.maxHp;  // Full heal on level up

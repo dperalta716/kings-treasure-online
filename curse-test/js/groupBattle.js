@@ -26,7 +26,7 @@ export function createCurseEnemy(enemyType) {
  * GroupBattle class - manages multi-combatant battles
  */
 export class GroupBattle {
-    constructor(terminal, character, companion, enemyTypes, curseSidebar, sprite = null, battleSprite = null) {
+    constructor(terminal, character, companion, enemyTypes, curseSidebar, sprite = null, battleSprite = null, initialTurnCount = 0) {
         this.terminal = terminal;
         this.character = character;
         this.companion = companion;
@@ -35,14 +35,17 @@ export class GroupBattle {
         this.sprite = sprite;
         this.battleSprite = battleSprite || sprite;  // Fall back to idle sprite if no battle sprite
 
-        // Curse drain tracking
-        this.turnCount = 0;
+        // Curse drain tracking (persists between battles)
+        this.turnCount = initialTurnCount;
         this.curseDrainInterval = CURSE_CONFIG.drainInterval;
         this.curseDrainAmount = CURSE_CONFIG.drainAmount;
 
         // Battle state
         this.isBossBattle = this.enemies.some(e => e.isBoss);
         this.showedBattleSprite = false;  // Track if we've transitioned to battle sprite
+
+        // Store enemy types for shield/enrage mechanics
+        this.enemyTypes = enemyTypes;
     }
 
     /**
@@ -53,10 +56,88 @@ export class GroupBattle {
     }
 
     /**
+     * Check if an enemy is being shielded by another living enemy
+     * Returns the shielding enemy or null
+     */
+    getShieldingEnemy(target) {
+        const targetType = this.enemyTypes[this.enemies.indexOf(target)];
+        for (let i = 0; i < this.enemies.length; i++) {
+            const enemy = this.enemies[i];
+            if (enemy.hp > 0 && enemy.shieldsAlly === targetType) {
+                return enemy;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Check if any enemy should enrage due to an ally dying
+     * Applies the enrage bonus and returns the enraged enemy or null
+     */
+    checkEnrage(deadEnemyType) {
+        for (const enemy of this.enemies) {
+            if (enemy.hp > 0 && enemy.enrageOnAllyDeath === deadEnemyType && !enemy.isEnraged) {
+                enemy.attack += enemy.enrageBonus || 0;
+                enemy.isEnraged = true;
+                return enemy;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Calculate damage with shield reduction, prints shield message
+     * Returns the reduced damage (caller must apply it)
+     */
+    getShieldedDamage(target, baseDamage, source = "blow") {
+        const shielder = this.getShieldingEnemy(target);
+        if (shielder) {
+            this.terminal.print(`[cyan]${shielder.name}'s protection absorbs half the ${source}![/cyan]`);
+            return Math.floor(baseDamage / 2);
+        }
+        return baseDamage;
+    }
+
+    /**
+     * Check if enemy died and trigger enrage if applicable
+     * Call AFTER dealing damage and printing attack message
+     */
+    checkDeathAndEnrage(target) {
+        if (target.hp <= 0) {
+            this.terminal.print(`[green]${target.name} defeated![/green]`);
+            const deadType = this.enemyTypes[this.enemies.indexOf(target)];
+            const enraged = this.checkEnrage(deadType);
+            if (enraged) {
+                this.terminal.print(`\n[red]*** ${enraged.name.toUpperCase()} FLIES INTO A RAGE! ***[/red]`);
+                this.terminal.print(`[red]${enraged.name}'s attack power surges! (+${enraged.enrageBonus} ATK)[/red]`);
+            }
+        }
+    }
+
+    /**
+     * Display special battle mechanics at start (shield/enrage warning)
+     */
+    displayBattleMechanics() {
+        // Check for shield mechanics
+        const shielder = this.enemies.find(e => e.shieldsAlly);
+        const enrager = this.enemies.find(e => e.enrageOnAllyDeath);
+
+        if (shielder && enrager) {
+            this.terminal.print("");
+            this.terminal.print("[yellow]*** TACTICAL WARNING ***[/yellow]");
+            this.terminal.print(`[cyan]${shielder.name}[/cyan] shields [cyan]${enrager.name}[/cyan], reducing damage by 50%!`);
+            this.terminal.print(`But if ${shielder.name} falls, ${enrager.name} will [red]ENRAGE[/red]!`);
+            this.terminal.print("");
+        }
+    }
+
+    /**
      * Update sidebar with current battle state
      */
     updateSidebar() {
         this.terminal.sidebar.updateHero(this.character);
+        // Update spells with strikethrough for used spells
+        this.terminal.sidebar.updateSpells(this.character, this.character.usedSpells);
         if (this.companion) {
             this.curseSidebar.updateCompanion(this.companion);
         }
@@ -243,22 +324,19 @@ export class GroupBattle {
             this.terminal.print("Your attack power DOUBLES!");
         }
 
-        target.takeDamage(result.damage);
-        this.terminal.print(`${message} and deal ${this.terminal.damageText(result.damage, result.isCritical || isPowerAttack)} damage!`);
-
-        if (target.hp <= 0) {
-            this.terminal.print(`[green]${target.name} defeated![/green]`);
-        }
+        // Apply damage with shield/enrage mechanics
+        const actualDamage = this.getShieldedDamage(target, result.damage);
+        target.takeDamage(actualDamage);
+        this.terminal.print(`${message} and deal ${this.terminal.damageText(actualDamage, result.isCritical || isPowerAttack)} damage!`);
+        this.checkDeathAndEnrage(target);
 
         // Echo Blade double strike
         if (result.echoTriggered && target.hp > 0) {
-            const echoDamage = Math.floor(result.damage / 2);
+            const echoDamage = this.getShieldedDamage(target, Math.floor(result.damage / 2));
             this.terminal.print("\n[cyan]*** ECHO BLADE RESONATES! ***[/cyan]");
-            this.terminal.print(`Your Echo Blade vibrates and strikes again for ${echoDamage} damage!`);
             target.takeDamage(echoDamage);
-            if (target.hp <= 0) {
-                this.terminal.print(`[green]${target.name} defeated by Echo Blade![/green]`);
-            }
+            this.terminal.print(`Your Echo Blade vibrates and strikes again for ${echoDamage} damage!`);
+            this.checkDeathAndEnrage(target);
         }
 
         // Chronometer Pendant extra turn (15% chance)
@@ -428,14 +506,12 @@ export class GroupBattle {
         if (spellData?.type === 'damageAndHeal') {
             // Soul Drain - damage and heal
             const target = await this.selectTarget("Target which enemy?");
-            const damage = spellData.damage || 15;
+            const damage = this.getShieldedDamage(target, spellData.damage || 15, "drain");
             target.takeDamage(damage);
             const healed = this.character.heal(damage);
             this.terminal.print(`\nYou cast [magenta]${spellName}[/magenta] on [bold]${target.name}[/bold]!`);
             this.terminal.print(`You drain [red]${damage}[/red] damage and heal [green]${healed}[/green] HP!`);
-            if (target.hp <= 0) {
-                this.terminal.print(`[green]${target.name} defeated![/green]`);
-            }
+            this.checkDeathAndEnrage(target);
             return 'continue';
         }
 
@@ -447,7 +523,7 @@ export class GroupBattle {
         if (spellData?.type === 'attackAndFreeze') {
             // Time Freeze - attack one target and freeze ALL enemies
             const target = await this.selectTarget("Target which enemy?");
-            const damage = this.character.attack + 10;  // Base attack damage
+            const damage = this.getShieldedDamage(target, this.character.attack + 10);
             target.takeDamage(damage);
 
             // Freeze ALL living enemies
@@ -461,18 +537,16 @@ export class GroupBattle {
             this.terminal.print(`You strike [bold]${target.name}[/bold] for [red]${damage}[/red] damage!`);
             if (livingEnemies.length > 1) {
                 this.terminal.print(`All ${livingEnemies.length} enemies are [cyan]FROZEN[/cyan] and will skip their next turn!`);
-            } else {
-                this.terminal.print(`${target.name} is [cyan]FROZEN[/cyan] and will skip their next turn!`);
+            } else if (livingEnemies.length === 1) {
+                this.terminal.print(`${livingEnemies[0].name} is [cyan]FROZEN[/cyan] and will skip their next turn!`);
             }
-            if (target.hp <= 0) {
-                this.terminal.print(`[green]${target.name} defeated![/green]`);
-            }
+            this.checkDeathAndEnrage(target);
             return 'continue';
         }
 
         // Single target attack spell
         const target = await this.selectTarget("Target which enemy?");
-        const damage = this.getSpellDamage(spellName, spellData);
+        const damage = this.getShieldedDamage(target, this.getSpellDamage(spellName, spellData), "spell");
         target.takeDamage(damage);
 
         this.terminal.print(`\nYou cast [magenta]${spellName}[/magenta] on [bold]${target.name}[/bold]!`);
@@ -484,16 +558,13 @@ export class GroupBattle {
         }
 
         this.terminal.print(`Magical energy deals [red]${damage}[/red] damage!`);
-
-        if (target.hp <= 0) {
-            this.terminal.print(`[green]${target.name} defeated![/green]`);
-        }
+        this.checkDeathAndEnrage(target);
 
         return 'continue';
     }
 
     /**
-     * Get spell damage (ATK + damageBonus + Mage bonus)
+     * Get spell damage (ATK + tempAttackBoost + damageBonus + Mage bonus)
      */
     getSpellDamage(spellName, spellData) {
         if (!spellData) spellData = SPELLS[spellName];
@@ -503,9 +574,10 @@ export class GroupBattle {
             return spellData.totalDamage || 20;
         }
 
-        // Attack spells use ATK + damageBonus
+        // Attack spells use ATK + tempAttackBoost + damageBonus
         const bonus = spellData?.damageBonus || 10;
-        let damage = this.character.attack + bonus;
+        const tempBoost = this.character.tempAttackBoost || 0;
+        let damage = this.character.attack + tempBoost + bonus;
 
         // Apply Mage spell damage bonus (+25%)
         const spellBonus = this.character.getSpellDamageBonus ? this.character.getSpellDamageBonus() : 0;
@@ -518,6 +590,8 @@ export class GroupBattle {
 
     /**
      * Cast an AoE spell that hits all enemies
+     * Note: Shield is checked per-enemy, so if the shielder dies first,
+     * the protected enemy takes full damage (AoE counters shield!)
      */
     async castAoESpell(spellName, spellData) {
         const livingEnemies = this.enemies.filter(e => e.hp > 0);
@@ -533,12 +607,10 @@ export class GroupBattle {
         }
 
         for (const enemy of livingEnemies) {
-            enemy.takeDamage(damagePerEnemy);
-            this.terminal.print(`  ${enemy.name} takes [red]${damagePerEnemy}[/red] damage!`);
-
-            if (enemy.hp <= 0) {
-                this.terminal.print(`  [green]${enemy.name} defeated![/green]`);
-            }
+            const actualDamage = this.getShieldedDamage(enemy, damagePerEnemy);
+            enemy.takeDamage(actualDamage);
+            this.terminal.print(`  ${enemy.name} takes [red]${actualDamage}[/red] damage!`);
+            this.checkDeathAndEnrage(enemy);
         }
 
         return 'continue';
@@ -563,15 +635,17 @@ export class GroupBattle {
             const healsLeft = this.companion.maxHealsPerBattle - this.companion.healsUsedThisBattle;
             this.terminal.print(`\n${this.companion.name} casts [cyan]Healing Touch[/cyan]!`);
             this.terminal.print(`You recover [green]${healed}[/green] HP! [dim](${healsLeft} heals remaining)[/dim]`);
+            this.terminal.sidebar.updateHero(this.character);  // Immediate HP update
         } else if (decision.action === 'attack' && decision.target) {
-            const result = this.companion.attackEnemy(decision.target);
+            const result = this.companion.calculateAttackDamage(decision.target);
+            const actualDamage = this.getShieldedDamage(decision.target, result.damage);
+            decision.target.takeDamage(actualDamage);
+
             if (result.isCritical) {
                 this.terminal.print(`\n[critical]CRITICAL HIT![/critical]`);
             }
-            this.terminal.print(`${this.companion.name} attacks [bold]${decision.target.name}[/bold] for ${this.terminal.damageText(result.damage, result.isCritical)} damage!`);
-            if (decision.target.hp <= 0) {
-                this.terminal.print(`[green]${decision.target.name} defeated![/green]`);
-            }
+            this.terminal.print(`${this.companion.name} attacks [bold]${decision.target.name}[/bold] for ${this.terminal.damageText(actualDamage, result.isCritical)} damage!`);
+            this.checkDeathAndEnrage(decision.target);
         }
 
         return 'continue';
@@ -588,19 +662,14 @@ export class GroupBattle {
             if (enemy.frozen) {
                 this.terminal.print(`\n[cyan]${enemy.name} is frozen in time and cannot act![/cyan]`);
                 enemy.frozen = false;  // Unfreeze after skipping turn
-                await this.terminal.delay(1500);
+                await this.terminal.delay(1000);
                 continue;
             }
 
-            // Flash to battle sprite on first enemy attack, then flash white on subsequent attacks
-            if (this.battleSprite) {
-                if (!this.showedBattleSprite) {
-                    await this.terminal.showBattleSprite(this.battleSprite, enemy.name);
-                    this.showedBattleSprite = true;
-                } else {
-                    // Flash white effect (same sprite, just the flash)
-                    await this.terminal.showBattleSprite(this.battleSprite, enemy.name);
-                }
+            // Show battle sprite on first enemy attack (no flash effect)
+            if (this.battleSprite && !this.showedBattleSprite) {
+                this.terminal.showSprite(this.battleSprite, enemy.name);
+                this.showedBattleSprite = true;
             }
 
             this.terminal.print(`\n[red][bold]${enemy.name}'s turn![/bold][/red]`);
@@ -608,7 +677,7 @@ export class GroupBattle {
             // Miss chance
             if (Math.random() < 0.2) {
                 this.terminal.print(`${enemy.name} fumbles and misses!`);
-                await this.terminal.delay(1500);  // Pause between enemy actions
+                await this.terminal.delay(1000);  // Pause between enemy actions
                 continue;
             }
 
@@ -711,7 +780,7 @@ export class GroupBattle {
             }
 
             // Pause between enemy attacks (1.5 seconds)
-            await this.terminal.delay(1500);
+            await this.terminal.delay(1000);
         }
 
         return 'continue';
@@ -721,11 +790,28 @@ export class GroupBattle {
      * Apply curse HP drain
      */
     async applyCurseDrain() {
+        // Trigger vignette effect
+        const vignette = document.getElementById('curse-vignette');
+        if (vignette) {
+            vignette.classList.remove('active');
+            void vignette.offsetWidth;  // Force reflow to restart animation
+            vignette.classList.add('active');
+        }
+
+        // Trigger HP bar glow effect (on container to avoid overflow clipping)
+        const hpBar = document.getElementById('hero-hp-bar');
+        const hpBarContainer = hpBar?.parentElement;
+        if (hpBarContainer) {
+            hpBarContainer.classList.remove('curse-glow');
+            void hpBarContainer.offsetWidth;  // Force reflow to restart animation
+            hpBarContainer.classList.add('curse-glow');
+        }
+
         this.terminal.print(`\n[magenta]${CURSE_CONFIG.drainMessage}[/magenta]`);
         this.terminal.print(`You lose [red]${this.curseDrainAmount}[/red] HP from the curse!`);
         const isDead = this.character.takeDamage(this.curseDrainAmount);
         this.terminal.sidebar.updateHero(this.character);  // Immediate HP update
-        await this.terminal.delay(1500);  // Pause to read curse drain message
+        await this.terminal.delay(1000);  // Pause to read curse drain message
 
         if (isDead) {
             this.terminal.print("\n[red]The curse has consumed you...[/red]");
@@ -808,15 +894,14 @@ export class GroupBattle {
 
     /**
      * Run the battle
-     * Returns true if player wins, false if defeated
+     * Returns { victory: boolean, turnCount: number }
      */
     async run() {
-        // Reset battle state
+        // Reset battle state (but NOT turnCount - it persists between battles)
         this.character.usedSpells = [];
         this.character.defending = false;
         this.character.charged = false;
         this.character.chargeUsedThisBattle = false;
-        this.turnCount = 0;
 
         // Show battle sprite if available
         if (this.sprite) {
@@ -827,6 +912,9 @@ export class GroupBattle {
         this.curseSidebar.showCombat();
         this.updateSidebar();
         this.displayEnemies();
+
+        // Show special mechanics warning (shield/enrage)
+        this.displayBattleMechanics();
 
         if (this.isBossBattle) {
             this.terminal.bossWarning();
@@ -848,7 +936,7 @@ export class GroupBattle {
             if (this.checkVictory()) {
                 await this.handleVictory();
                 this.curseSidebar.hideCombat();
-                return true;
+                return { victory: true, turnCount: this.turnCount };
             }
 
             // Companion turn (only if companion exists and is conscious)
@@ -860,7 +948,7 @@ export class GroupBattle {
                 if (this.checkVictory()) {
                     await this.handleVictory();
                     this.curseSidebar.hideCombat();
-                    return true;
+                    return { victory: true, turnCount: this.turnCount };
                 }
             }
 
@@ -872,14 +960,14 @@ export class GroupBattle {
                 this.terminal.defeatBanner();
                 this.terminal.print("You have been defeated!");
                 this.curseSidebar.hideCombat();
-                return false;
+                return { victory: false, turnCount: this.turnCount };
             }
 
             // Check victory after enemy turn (Gladiator Shield/Gear Shield can kill last enemy)
             if (enemyResult === 'victory' || this.checkVictory()) {
                 await this.handleVictory();
                 this.curseSidebar.hideCombat();
-                return true;
+                return { victory: true, turnCount: this.turnCount };
             }
 
             // Curse drain check
@@ -888,7 +976,7 @@ export class GroupBattle {
                     this.terminal.defeatBanner();
                     this.terminal.print("[red]The curse has fully consumed you. You are now a Wraith forever...[/red]");
                     this.curseSidebar.hideCombat();
-                    return false;
+                    return { victory: false, turnCount: this.turnCount };
                 }
                 // Don't update sidebar here - next turn will reset countdown to 3
             }

@@ -45,22 +45,26 @@ export class CurseSidebar {
      * Update companion display
      */
     updateCompanion(companion) {
+        if (!this.companionSection) return;
+
         if (!companion) {
             this.companionSection.classList.add('hidden');
             return;
         }
 
         this.companionSection.classList.remove('hidden');
-        this.companionName.textContent = companion.name;
-        this.companionRole.textContent = companion.role;
+        if (this.companionName) this.companionName.textContent = companion.name;
+        if (this.companionRole) this.companionRole.textContent = companion.role;
 
         if (companion.isConscious) {
-            this.updateHpBar(this.companionHpBar, this.companionHpText, companion.hp, companion.maxHp);
-            this.companionName.classList.remove('unconscious');
+            if (this.companionHpBar && this.companionHpText) {
+                this.updateHpBar(this.companionHpBar, this.companionHpText, companion.hp, companion.maxHp);
+            }
+            if (this.companionName) this.companionName.classList.remove('unconscious');
         } else {
-            this.companionHpBar.style.width = '0%';
-            this.companionHpText.textContent = 'UNCONSCIOUS';
-            this.companionName.classList.add('unconscious');
+            if (this.companionHpBar) this.companionHpBar.style.width = '0%';
+            if (this.companionHpText) this.companionHpText.textContent = 'UNCONSCIOUS';
+            if (this.companionName) this.companionName.classList.add('unconscious');
         }
     }
 
@@ -69,6 +73,8 @@ export class CurseSidebar {
      * Reuses existing DOM elements for smooth CSS transitions
      */
     updateEnemies(enemies) {
+        if (!this.enemiesSection || !this.enemiesList) return;
+
         if (!enemies || enemies.length === 0) {
             this.enemiesSection.classList.add('hidden');
             return;
@@ -105,7 +111,7 @@ export class CurseSidebar {
                 hpFill.className = 'bar';
 
                 const hpText = document.createElement('div');
-                hpText.className = 'enemy-hp-mini-text';
+                hpText.className = 'enemy-hp-text';
 
                 hpBar.appendChild(hpFill);
                 infoDiv.appendChild(nameSpan);
@@ -121,7 +127,7 @@ export class CurseSidebar {
             // Update existing elements (triggers CSS transition)
             const nameSpan = row.querySelector('.name');
             const hpFill = row.querySelector('.bar');
-            const hpText = row.querySelector('.enemy-hp-mini-text');
+            const hpText = row.querySelector('.enemy-hp-text');
 
             if (enemy.hp <= 0) {
                 row.classList.add('defeated');
@@ -136,9 +142,11 @@ export class CurseSidebar {
             hpText.textContent = `${enemy.hp}/${enemy.maxHp}`;
         });
 
-        // Remove extra rows if enemies list shrunk (shouldn't happen in battle)
-        while (existingRows.length > enemies.length) {
-            this.enemiesList.removeChild(existingRows[existingRows.length - 1]);
+        // Remove extra rows if enemies list shrunk (between battles)
+        let currentRows = this.enemiesList.querySelectorAll('.enemy-row');
+        while (currentRows.length > enemies.length) {
+            this.enemiesList.removeChild(currentRows[currentRows.length - 1]);
+            currentRows = this.enemiesList.querySelectorAll('.enemy-row');  // Refresh after removal
         }
     }
 
@@ -156,16 +164,16 @@ export class CurseSidebar {
      */
     showCombat() {
         // Note: companion section visibility is controlled by updateCompanion()
-        this.enemiesSection.classList.remove('hidden');
-        this.curseIndicator.classList.remove('hidden');
+        if (this.enemiesSection) this.enemiesSection.classList.remove('hidden');
+        if (this.curseIndicator) this.curseIndicator.classList.remove('hidden');
     }
 
     /**
      * Hide combat UI elements
      */
     hideCombat() {
-        this.enemiesSection.classList.add('hidden');
-        this.curseIndicator.classList.add('hidden');
+        if (this.enemiesSection) this.enemiesSection.classList.add('hidden');
+        if (this.curseIndicator) this.curseIndicator.classList.add('hidden');
     }
 
     /**
@@ -173,6 +181,6 @@ export class CurseSidebar {
      */
     showCompanionOnly(companion) {
         this.updateCompanion(companion);
-        this.enemiesSection.classList.add('hidden');
+        if (this.enemiesSection) this.enemiesSection.classList.add('hidden');
     }
 }

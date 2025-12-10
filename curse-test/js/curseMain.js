@@ -61,6 +61,7 @@ class CurseTest {
         this.character = null;
         this.companion = null;
         this.currentBattle = 0;
+        this.curseTurnCount = 0;  // Persists between battles
     }
 
     /**
@@ -188,10 +189,13 @@ class CurseTest {
                 battleInfo.enemies,
                 this.curseSidebar,
                 battleInfo.sprite || null,
-                battleInfo.battleSprite || null
+                battleInfo.battleSprite || null,
+                this.curseTurnCount  // Pass persistent turn count
             );
 
-            const victory = await battle.run();
+            const result = await battle.run();
+            const victory = result.victory;
+            this.curseTurnCount = result.turnCount;  // Save turn count for next battle
 
             if (!victory) {
                 this.terminal.print("\n[red][bold]GAME OVER[/bold][/red]");
@@ -209,6 +213,16 @@ class CurseTest {
             this.character.hp += healed;
             if (healed > 0) {
                 this.terminal.print(`\n[dim]You rest briefly and recover ${healed} HP.[/dim]`);
+            }
+
+            // Companion heals between battles too (15 HP)
+            if (this.companion && this.companion.isConscious && !battleInfo.isSolo) {
+                const companionHealAmount = 15;
+                const companionHealed = Math.min(companionHealAmount, this.companion.maxHp - this.companion.hp);
+                this.companion.hp += companionHealed;
+                if (companionHealed > 0) {
+                    this.terminal.print(`[dim]${this.companion.name} recovers ${companionHealed} HP.[/dim]`);
+                }
             }
 
             this.terminal.sidebar.updateHero(this.character);
@@ -358,7 +372,9 @@ class CurseTest {
         this.terminal.print(`  Level: ${this.character.level}`);
         this.terminal.print(`  HP: ${this.character.hp}/${this.character.maxHp}`);
         this.terminal.print(`  Gold: ${this.character.gold}`);
-        this.terminal.print(`  Companion: ${this.companion.name} (${this.companion.hp}/${this.companion.maxHp} HP)`);
+        if (this.companion) {
+            this.terminal.print(`  Companion: ${this.companion.name} (${this.companion.hp}/${this.companion.maxHp} HP)`);
+        }
         this.terminal.print("");
         this.terminal.print("[dim]Battle skeleton test complete![/dim]");
         this.terminal.print("[dim]Refresh the page to play again.[/dim]");
@@ -366,7 +382,7 @@ class CurseTest {
 }
 
 // Start the test when page loads
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
     const test = new CurseTest();
-    test.init();
+    await test.init();
 });

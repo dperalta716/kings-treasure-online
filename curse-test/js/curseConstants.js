@@ -115,20 +115,23 @@ export const CURSE_ENEMY_DATA = {
     'path_boss': {
         name: "Serpent Lord",
         hp: 150,
-        attack: 31,      // 31 - 15 DEF = 16 damage
+        attack: 31,      // Base: 31 - 13 DEF = 18 damage. Enraged: 43 - 13 = 30 damage
         defense: 9,
         xp: 250,
         gold: 100,
-        isBoss: true     // 25% crit chance
+        isBoss: true,    // 25% crit chance
+        enrageOnAllyDeath: 'serpent_minion',  // Enrages when this ally dies
+        enrageBonus: 12  // +12 ATK when enraged
     },
     'serpent_minion': {
         name: "Serpent Guard",
         hp: 60,
-        attack: 27,      // 27 - 15 DEF = 12 damage
+        attack: 27,      // 27 - 13 DEF = 14 damage
         defense: 4,
         xp: 40,
         gold: 15,
-        isBoss: false    // No crits
+        isBoss: false,   // No crits
+        shieldsAlly: 'path_boss'  // Reduces damage to this ally by 50%
     },
 
     // Battle 9: Cursed King (2v1 - LAST with companion) - Target 34 total

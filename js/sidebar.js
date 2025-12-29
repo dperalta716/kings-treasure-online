@@ -32,6 +32,8 @@ export class Sidebar {
         this.potionCount = document.getElementById('potion-count');
         this.superiorPotionCount = document.getElementById('superior-potion-count');
         this.superiorPotionsRow = document.getElementById('superior-potions-row');
+        this.masterPotionCount = document.getElementById('master-potion-count');
+        this.masterPotionsRow = document.getElementById('master-potions-row');
         this.strengthElixirCount = document.getElementById('strength-elixir-count');
         this.strengthElixirsRow = document.getElementById('strength-elixirs-row');
         this.defensePotionCount = document.getElementById('defense-potion-count');
@@ -94,6 +96,13 @@ export class Sidebar {
             this.superiorPotionCount.textContent = character.superiorPotions;
         } else {
             this.superiorPotionsRow.classList.add('hidden');
+        }
+
+        if (character.masterPotions > 0 && this.masterPotionsRow) {
+            this.masterPotionsRow.classList.remove('hidden');
+            this.masterPotionCount.textContent = character.masterPotions;
+        } else if (this.masterPotionsRow) {
+            this.masterPotionsRow.classList.add('hidden');
         }
 
         // Buff potions

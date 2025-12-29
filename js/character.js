@@ -26,6 +26,7 @@ export class Character {
         // Inventory
         this.potions = 0;
         this.superiorPotions = 0;
+        this.masterPotions = 0;
         this.strengthElixirs = 0;
         this.defenseElixirs = 0;
         this.masterStrengthElixirs = 0;
@@ -247,6 +248,18 @@ export class Character {
     }
 
     /**
+     * Use a master health potion (heals 65 HP)
+     */
+    useMasterPotion() {
+        if (this.masterPotions <= 0) return false;
+
+        this.masterPotions--;
+        const healAmount = Math.min(65, this.maxHp - this.hp);
+        this.hp = Math.min(this.maxHp, this.hp + 65);
+        return healAmount;
+    }
+
+    /**
      * Take damage
      */
     takeDamage(amount) {
@@ -336,6 +349,7 @@ export class Character {
             shield: this.shield,
             potions: this.potions,
             superiorPotions: this.superiorPotions,
+            masterPotions: this.masterPotions,
             strengthElixirs: this.strengthElixirs,
             defenseElixirs: this.defenseElixirs,
             masterStrengthElixirs: this.masterStrengthElixirs,
@@ -378,6 +392,7 @@ export class Character {
         char.shield = data.shield;
         char.potions = data.potions;
         char.superiorPotions = data.superiorPotions || 0;
+        char.masterPotions = data.masterPotions || 0;
         char.strengthElixirs = data.strengthElixirs || 0;
         char.defenseElixirs = data.defenseElixirs || 0;
         char.masterStrengthElixirs = data.masterStrengthElixirs || 0;

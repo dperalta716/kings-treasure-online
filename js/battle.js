@@ -363,8 +363,8 @@ export class Battle {
             optNum++;
         }
         if (this.character.strengthElixirs > 0) {
-            potionOptions.push({ key: optNum, type: 'strength', name: 'Strength Elixir', count: this.character.strengthElixirs, desc: '+2 attack this battle' });
-            this.terminal.print(`  ${optNum}. Strength Elixir (${this.character.strengthElixirs}) - +2 attack this battle`);
+            potionOptions.push({ key: optNum, type: 'strength', name: 'Strength Elixir', count: this.character.strengthElixirs, desc: '+6 damage this battle' });
+            this.terminal.print(`  ${optNum}. Strength Elixir (${this.character.strengthElixirs}) - +6 damage this battle`);
             optNum++;
         }
         if (this.character.defenseElixirs > 0) {
@@ -373,8 +373,8 @@ export class Battle {
             optNum++;
         }
         if (this.character.masterStrengthElixirs > 0) {
-            potionOptions.push({ key: optNum, type: 'masterStrength', name: "Master's Strength Elixir", count: this.character.masterStrengthElixirs, desc: '+5 attack this battle' });
-            this.terminal.print(`  ${optNum}. Master's Strength Elixir (${this.character.masterStrengthElixirs}) - +5 attack this battle`);
+            potionOptions.push({ key: optNum, type: 'masterStrength', name: "Master's Strength Elixir", count: this.character.masterStrengthElixirs, desc: '+10 damage this battle' });
+            this.terminal.print(`  ${optNum}. Master's Strength Elixir (${this.character.masterStrengthElixirs}) - +10 damage this battle`);
             optNum++;
         }
         if (this.character.ultimateDefensePotions > 0) {
@@ -407,9 +407,9 @@ export class Battle {
                 return this.useSuperiorPotion();
             case 'strength':
                 this.character.strengthElixirs--;
-                this.character.tempAttackBoost += 2;
+                this.character.tempAttackBoost += 6;
                 this.terminal.print("\nYou drink a Strength Elixir!");
-                this.terminal.print("[green]+2 attack[/green] for the rest of this battle!");
+                this.terminal.print("[green]+6 damage[/green] for the rest of this battle!");
                 return 'continue';
             case 'defense':
                 this.character.defenseElixirs--;
@@ -419,9 +419,9 @@ export class Battle {
                 return 'continue';
             case 'masterStrength':
                 this.character.masterStrengthElixirs--;
-                this.character.tempAttackBoost += 5;
+                this.character.tempAttackBoost += 10;
                 this.terminal.print("\nYou drink a Master's Strength Elixir!");
-                this.terminal.print("[green]+5 attack[/green] for the rest of this battle!");
+                this.terminal.print("[green]+10 damage[/green] for the rest of this battle!");
                 return 'continue';
             case 'ultimateDefense':
                 this.character.ultimateDefensePotions--;
@@ -462,7 +462,7 @@ export class Battle {
         this.character.usedSpells.push(spellName);
 
         if (spell.type === 'attack') {
-            let damage = this.character.attack + spell.damageBonus;
+            let damage = this.character.attack + spell.damageBonus + (this.character.tempAttackBoost || 0);
             // Apply Mage spell damage bonus (+25%)
             const spellBonus = this.character.getSpellDamageBonus ? this.character.getSpellDamageBonus() : 0;
             if (spellBonus > 0) {

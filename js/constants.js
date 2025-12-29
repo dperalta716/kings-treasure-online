@@ -280,7 +280,7 @@ export const SHOP_SHIELDS = {
 
 export const SHOP_POTIONS = {
     "Health Potion": { price: 15, effect: "Restores 25 HP" },
-    "Strength Elixir": { price: 20, effect: "+2 attack for one battle" },
+    "Strength Elixir": { price: 20, effect: "+6 damage for one battle" },
     "Defense Potion": { price: 20, effect: "+2 defense for one battle" }
 };
 
@@ -296,7 +296,7 @@ export const ADVANCED_SHOP_SHIELDS = {
 
 export const ADVANCED_SHOP_POTIONS = {
     "Superior Health Potion": { price: 45, effect: "Restores 45 HP" },
-    "Master's Strength Elixir": { price: 45, effect: "+5 attack for one battle" },
+    "Master's Strength Elixir": { price: 45, effect: "+10 damage for one battle" },
     "Ultimate Defense Potion": { price: 45, effect: "+5 defense for one battle" }
 };
 
@@ -358,23 +358,23 @@ export const SPELLS = {
     "Void Bolt": {
         unlockLevel: 5,
         type: "aoe",
-        totalDamage: 20,
+        totalDamage: 24,
         isAoE: true,
-        description: "Void energy strikes all enemies (20 damage split)"
+        description: "Void energy strikes all enemies (24 damage split)"
     },
     "Chain Lightning": {
         unlockLevel: 6,
         type: "aoe",
-        totalDamage: 24,
+        totalDamage: 27,
         isAoE: true,
-        description: "Lightning arcs between all enemies (24 damage split)"
+        description: "Lightning arcs between all enemies (27 damage split)"
     },
     "Cursed Wave": {
         unlockLevel: 7,
         type: "aoe",
-        totalDamage: 28,
+        totalDamage: 30,
         isAoE: true,
-        description: "A wave of cursed energy hits all foes (28 damage split)"
+        description: "A wave of cursed energy hits all foes (30 damage split)"
     }
 };
 

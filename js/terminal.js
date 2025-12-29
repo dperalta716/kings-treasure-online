@@ -292,6 +292,43 @@ export class Terminal {
     }
 
     /**
+     * Slow fade transition between sprites (fade to white, then back)
+     * @param {string} newSrc - New sprite source
+     * @param {string} label - New sprite label
+     * @param {number} duration - Total fade duration in ms (default 2500)
+     */
+    async slowFadeWhiteSprite(newSrc, label, duration = 2500) {
+        // Preload the new image
+        const preload = new Image();
+        preload.src = newSrc;
+
+        const halfDuration = duration / 2;
+
+        // Set transition duration dynamically
+        this.sprite.style.transition = `filter ${halfDuration}ms ease-in-out`;
+
+        // Fade to white (using brightness filter)
+        this.sprite.style.filter = 'brightness(3)';
+        await this.delay(halfDuration);
+
+        // Swap image while white
+        this.sprite.src = newSrc;
+        this.sprite.alt = label;
+        this.spriteLabel.textContent = label;
+
+        // Brief pause at white
+        await this.delay(200);
+
+        // Fade back in from white
+        this.sprite.style.filter = 'brightness(1)';
+        await this.delay(halfDuration);
+
+        // Clean up
+        this.sprite.style.transition = '';
+        this.sprite.style.filter = '';
+    }
+
+    /**
      * Hide the sprite panel image
      */
     hideSprite() {

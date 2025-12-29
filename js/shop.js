@@ -380,7 +380,7 @@ export class Shop {
             this.terminal.print(`You now have ${this.character.potions} Health Potions.`);
         } else if (name === "Strength Elixir") {
             this.character.strengthElixirs++;
-            this.terminal.print("You bought a Strength Elixir! Use it in battle for +2 attack.");
+            this.terminal.print("You bought a Strength Elixir! Use it in battle for +6 damage.");
             this.terminal.print(`You now have ${this.character.strengthElixirs} Strength Elixirs.`);
         } else if (name === "Defense Potion") {
             this.character.defenseElixirs++;
@@ -419,7 +419,7 @@ export class Shop {
             this.terminal.print(`You now have ${this.character.superiorPotions} Superior Health Potions.`);
         } else if (name === "Master's Strength Elixir") {
             this.character.masterStrengthElixirs++;
-            this.terminal.print("You bought a Master's Strength Elixir! Use it in battle for +5 attack.");
+            this.terminal.print("You bought a Master's Strength Elixir! Use it in battle for +10 damage.");
             this.terminal.print(`You now have ${this.character.masterStrengthElixirs} Master's Strength Elixirs.`);
         } else if (name === "Ultimate Defense Potion") {
             this.character.ultimateDefensePotions++;

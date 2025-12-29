@@ -513,7 +513,7 @@ export class Game {
      * Convergence Paths - three doorways
      */
     async convergencePaths() {
-        this.terminal.showSprite(getLocationSprite('three_doors'), 'Three Doors');
+        this.terminal.showSprite(getLocationSprite('three_doors'), 'The Land of Crystal, Fire, and Ruin');
         this.terminal.print("\nYou emerge from the depths and stand before a vast landscape with three distinct regions:");
         this.terminal.print("\n1. A crystalline land glowing with [cyan]purple and blue light[/cyan]");
         this.terminal.print("2. A volcanic mountain radiating [red]intense heat[/red]");
